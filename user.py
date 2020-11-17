@@ -48,7 +48,7 @@ class User:
         print("please input username and password")
         user_name = input("username : ")
         pass_word = input("password : ")
-        print("you are logging in as : \n 1-student \n 2-employee \n 3-teacher \n")
+        print("you are logging in as : \n1-student \n2-employee \n3-teacher \n")
         user_job = input()
         if user_job == 1:
             type = "student"
@@ -61,9 +61,7 @@ class User:
         try:
             with open("accounts.csv", mode='a+') as account_file:
                 csv_writer = csv.writer(account_file, delimiter=',')
-                # data = [["username", "password", "type"]]
-
-                csv_writer.writerow([user_name, pass_word,type])
+                data = [user_name,pass_word,type]
 
 
         except Exception:
