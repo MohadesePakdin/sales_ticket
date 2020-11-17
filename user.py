@@ -59,11 +59,11 @@ class User:
         else :
             return exit()
         try:
-            with open("accountts.csv", mode='a+') as account_file:
+            with open("accounts.csv", mode='a+') as account_file:
                 csv_writer = csv.writer(account_file, delimiter=',')
                 # data = [["username", "password", "type"]]
 
-                csv_writer .writerow([user_name, pass_word,type])
+                csv_writer.writerow([user_name, pass_word,type])
 
 
         except Exception:
@@ -82,6 +82,6 @@ class User:
 
 a = User('s', 'm')
 # a.show_event()
-a.show_detail(1)
+# a.show_detail(1)
 # a.choose_event(2)
-# a.create_account()
+a.create_account()
