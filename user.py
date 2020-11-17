@@ -46,7 +46,7 @@ class User:
     def create_account(self):
         flag = 0
         print("please input username and password")
-        user_name = input("username : ")
+        user_name = input("username: ")
         pass_word = input("password : ")
         print("you are logging in as : \n 1-student \n 2-employee \n 3-teacher \n")
         user_job = input()
