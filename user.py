@@ -82,6 +82,6 @@ class User:
 
 a = User('s', 'm')
 # a.show_event()
-# a.show_detail(1)
+a.show_detail(1)
 # a.choose_event(2)
-a.create_account()
+# a.create_account()
