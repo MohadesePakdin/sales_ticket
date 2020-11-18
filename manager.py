@@ -13,10 +13,11 @@ from event import Event
 
 
 class Admin:
-    def __init__(self, username, password,flag=1):
+    def __init__(self, username, password, flag=1):
         self.username = username
         self.password = password
         self.flag = flag
+
     def login(self):
         number_try = 3
         while number_try > 0:  # baraye inke agar eshtebah vared kard dobare azash bkhad ke user pass bzne ya inke bre biron
@@ -115,3 +116,6 @@ class Admin:
                   "place_event,Cost_event,Total_capacity,Mod_total_capacity,Flag_event)"
                   "and second row with this item (0,) without parenthesis ")
         obj_event.create_event()
+
+    def add_discount(self):
+        pass
