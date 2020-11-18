@@ -4,17 +4,15 @@ import csv
 import pandas as pd
 
 logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %(message)s')
-coloredlogs.install(fmt='%(asctime)s,%(msecs)03d %(hostname)s %(name)s[%(process)d] %(levelname)s %(message)s')
+# coloredlogs.install(fmt='%(asctime)s,%(msecs)03d %(hostname)s %(name)s[%(process)d] %(levelname)s %(message)s')
 
 
 class User:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-
+    def __init__(self):
+        pass
     def show_event(self):
         try:
-            with open("events.csv", mode='a+') as new_file:
+            with open("eventsmohadese.csv", mode='a+') as new_file:
                 csv_writer = csv.writer(new_file, delimiter=',')
                 data = [["name_event", "date_event", "capasity", "time_event", "price"],
                         ["joker", "20nov", "100", "10:00", "10$"],
@@ -25,10 +23,10 @@ class User:
             new_file.close()
         except Exception:
             logging.exception('this is file error')
-
+        #taghir konad
     def show_detail(self, user_input):
         try:
-            with open("events.csv", mode='r') as csv_file:
+            with open("eventsmohadese.csv", mode='r') as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=',')
                 movies = [movie for movie in csv_reader]
                 print(f"movie name :", (movies[user_input][0]), ", date_event:", (movies[user_input][1]), ", zarfiat:",
@@ -39,7 +37,7 @@ class User:
 
     def choose_event(self, input_user):
         input_user = int(input("your selection : "))
-        with open("events.csv", 'r') as my_file:
+        with open("eventsmohadese", 'r') as my_file:
             reader = csv.reader(my_file)
             rows = list(reader)
             print("your selection is :", rows[input_user][0])
@@ -101,8 +99,8 @@ class User:
 
 
 
-a = User('s', 'm')
+a = User()
 # a.show_event()
-# a.show_detail(1)
+a.show_detail(2)
 # a.choose_event(2)
-a.create_account()
+# a.create_account()
