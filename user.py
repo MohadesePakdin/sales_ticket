@@ -54,8 +54,8 @@ class User:
             df_account_indexed = df_account.set_index("id_account", drop=True)
             list_username = list(df_account_indexed["username"])
             while True:
-                username = input("input your username: ")
-                if username not in list_username[1:]:
+                username_account = input("input your username: ")
+                if username_account not in list_username[1:]:
                     print("add")
                     break
                 else:
