@@ -3,8 +3,8 @@ import sys
 import pandas as pd
 
 # this is a welcome message
-from v1.admin import Admin
-from v1.user import User
+from manager import Admin
+from user import User
 
 print("-----------------------------------------------------------------------------------")
 print("---------------------------welcome to sales ticket app-----------------------------")
@@ -18,68 +18,41 @@ while True:
             if user_input_selected == 1:
                 obj_admin = Admin()
                 obj_admin.log_in()
+                # menu(add_event  ,  add_off  ,  show_detail , update/remove_event)
+                #add_event : define a new event
+                #add_off :
                 break
             elif user_input_selected == 2:
                 obj_user = User()
-                obj_user.show_event("event.csv")
-                user_event_select=input("please select one of events: ")
-                obj_user.show_detail(user_event_select)
-                break
+                obj_user.show_event("event.csv") #hameye detail ro neshun nadim (masalan price)
+                input_user = int(input("select one of them :"))
+                obj_user.choose_event(input_user)
+                obj_user.show_detail(input_user)  #eenja hame ye jozeiat dide she
+                print("Do you want to buy it ?")
+                input_user_want_to_buy = input("y/n")
+                if input_user_want_to_buy == 'y' :
+                    print("log in OR sign in ?")
+                    input_user_log_or_sign = int(input("1 or 2"))
+                    if input_user_log_or_sign == 1:
+                        obj_user.log_in()
+                    elif input_user_log_or_sign == 2:
+                        obj_user.create_account()
+
+                    #agar ba movafaghiat vared shod marahele kharid ra edame dahad
+
+                elif input_user_want_to_buy == 'n':
+                    print("Do you want to exit or back to menu ?")
+                    input_user_exit_or_continue = input("exit or continue")
+                    if input_user_exit_or_continue == 'exit':
+                        sys.exit()
+                    elif input_user_exit_or_continue == 'continue':
+                        obj_user.show_event("event.csv")
+
+                break #exit
         else:
             print("your input is not valid please select other choice")
     except ValueError:
-            print("your input is not valid please select other choice")
+        print("your input is not valid please select other choice")
 
-#         if True:  # read from csv and check/ log in succ
-#             print("1-show_details_event 2-add_event3-remove_event4- create_off5-exit()")
-#             input_selected = input("select a item: ")
-#             if input_selected == 1:
-#                 Admin.show_details_event()
-#                 # tamrin 2 soal 2 ...... admin modam menu bbinad
-#             elif input_selected == 2:
-#                 Admin.add_event()
-#             elif input_selected == 3:
-#                 Admin.remove_event()
-#             elif input_selected == 4:
-#                 pass
-#             else:
-#                 sys.exit()
-#         print("user or pass is wrong please try again")
-#
-# elif a == 2:
-#     User.show_event()
-#     print("aya ghasde kharid darid ? y/n")
-#     a = input()
-#     if a == 'y':
-#         print("1-log in \n 2-sign up")
-#         b = int(input("vared kon"))
-#         if b == 1:
-#             User.log_in()
-#
-#         elif b == 2:
-#             # user o pass ro migire mire add mikone be file csv mun
-#             # file ya method bashe?
-#             User.log_in()
-#
-#         User.show_event()
-#         print("please select one of them")
-#         a = int(input())
-#         # 1-x
-#         # 2-y
-#         # 3-z
-#         User.show_detail()
-#         # show detail of the chossen event
-#         print("tedade blit ra vared konid !!!")
-#         c = input()
-#         # gheimate kole blit haye shoma 30000 toman mishe
-#         print("aya code takhfif darid ?")
-#         g = input()
-#         if g == 'y':
-#         # check in csv va emal takhfif
-#         # age nabud begim yaft nashod ya KHARID kone ya CANCEL
-#         elif g == 'n':
-#             print("pol bede ")
-#
-#
-#     else:
-#         sys.exit()
+
+
