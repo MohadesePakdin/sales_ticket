@@ -1,9 +1,10 @@
 # import event
-import logging
+import coloredlogs,logging
 import csv
-
+import pandas as pd
 
 logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %(message)s')
+coloredlogs.install(fmt='%(asctime)s,%(msecs)03d %(hostname)s %(name)s[%(process)d] %(levelname)s %(message)s')
 
 
 class User:
@@ -44,44 +45,64 @@ class User:
             print("your selection is :", rows[input_user][0])
 
     def create_account(self):
-        flag = 0
-        print("please input username and password")
-        user_name = input("username : ")
-        pass_word = input("password : ")
-        print("you are logging in as : \n 1-student \n 2-employee \n 3-teacher \n")
-        user_job = input()
-        if user_job == 1:
-            type = "student"
-        elif user_job == 2:
-            type = "employee"
-        elif user_job == 3:
-            type = "teacher"
-        else :
-            return exit()
+
+        file_path = "account.csv"
         try:
-            with open("accountts.csv", mode='a+') as account_file:
-                csv_writer = csv.writer(account_file, delimiter=',')
-                # data = [["username", "password", "type"]]
+            df_account = pd.read_csv(file_path)
+            df_account_indexed = df_account.set_index("id_account", drop=True)
+            df_account = pd.read_csv("account.csv")
+            df_account_indexed = df_account.set_index("id_account", drop=True)
+            list_username = list(df_account_indexed["username"])
+            while True:
+                username_account = input("input your username: ")
+                if username_account not in list_username[1:]:
+                    print("add")
+                    break
+                else:
+                    print("your username duplicated ")
+            # username_account = input("Please input username: ")
+            password_account = input("Please input password: ")
+            print("Please select one of follow choice:")
+            print("You are logging in as : \n1-STUDENT \n2-EMPLOYEE \n3-TEACHER \n")
+            #in future we want
+            while True:
+                #USER HAS TO INPUT ONE OF THEM
+                try:
+                    input_user_type = int(input("1 or 2 or 3: "))
+                    if input_user_type in [1, 2, 3]:
+                        if input_user_type == 1:
+                            type_account = "Student"
+                            break
+                        elif input_user_type == 2:
+                            type_account = "Employee"
+                            break
+                        elif input_user_type == 3:
+                            type_account = "Teacher"
+                            break
+                    else:
+                        print("Your input is INVALID please try again. ")
+                except Exception:
+                    print("Your input is INVALID please try again. ")
+            row_account = [[df_account_indexed.index[-1] + 1, username_account, str(password_account), type_account, 1]]
 
-                csv_writer .writerow([user_name, pass_word,type])
-
-
+            with open(file_path, 'a', newline='') as csv_account:
+                csv_writer = csv.writer(csv_account)
+                # writing the data row
+                csv_writer.writerows(row_account)
         except Exception:
-            logging.exception('ERROR')
+            print("you have not this file please create a file with name account.csv and set first row with this items "
+                  "(id_account,username,password,flag)and second row with this item (0,) without parenthesis")
+            logging.exception('not completely header in file')
 
-    # def log_in(self):
-    #     username = input()
-    #     password = input()
-    #     # input user and pass
-    #     if True:
-    #         print("your logging is successfully")
-    #     else:
-    #         return False
-    #         # halgheye while ezafe shavad ya eenke exit ra vared konad va kharej shavad
+
+
+    def log_in(self):
+        pass
+
 
 
 a = User('s', 'm')
 # a.show_event()
-a.show_detail(1)
+# a.show_detail(1)
 # a.choose_event(2)
-# a.create_account()
+a.create_account()
