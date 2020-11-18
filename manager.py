@@ -9,6 +9,8 @@ import pandas as pd
 # use this library for colored code
 from termcolor import colored
 
+from event import Event
+
 
 class Admin:
     def __init__(self, username, password,flag=1):
