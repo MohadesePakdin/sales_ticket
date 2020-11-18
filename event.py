@@ -1,3 +1,17 @@
+class Event:
+    def __init__(self, id_event, name_event, date_event, time_event, place_event, cost_event, total_capacity,
+                 mod_total_capacity, flag_event=1):
+        self.id_event = id_event
+        self.name_event = name_event
+        self.date_event = date_event
+        self.time_event = time_event
+        self.place_event=place_event
+        self.cost_event=cost_event
+        self.total_capacity = total_capacity
+        self.mod_total_capacity = mod_total_capacity
+        self.flag_event = flag_event
+    def create_event(self):
+
 # this library is for work by csv file
 import csv
 # this library is for import correct date and time to csv file
@@ -11,7 +25,7 @@ from termcolor import colored
 # we have a csv file at first and csv file have 2 static record that dont delete this first row is my attribute
 # and second row is set first id and add them in future record
 # load csv file
-file_name = "events.csv"
+file_name = "event.csv"
 # exception handling
 try:
     df_events = pd.read_csv(file_name)
@@ -47,7 +61,7 @@ try:
         csv_writer.writerows(row)
 # if file not fount
 except FileNotFoundError:
-    print("you have not this file please create a file with name events.csv and set first "
+    print("you have not this file please create a file with name event.csv and set first "
           "row with this items (id_event,Name_event,Date_event,Time_event,"
           "place_event,Cost_event,Total_capacity,Mod_total_capacity,Flag_event)"
           "and second row with this item (0,) without parenthesis ")

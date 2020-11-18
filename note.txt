@@ -1,0 +1,5 @@
+1-colorful logging
+2-logging (level,text of error)
+3-colorful output
+4-GUI
+5-colored output
