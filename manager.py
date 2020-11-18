@@ -11,7 +11,7 @@ from termcolor import colored
 
 
 class Admin:
-    def __init__(self, username, password,flag):
+    def __init__(self, username, password,flag=1):
         self.username = username
         self.password = password
         self.flag = flag
