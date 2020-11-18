@@ -10,8 +10,10 @@ logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %
 
 
 class User:
-    def __init__(self):
-        pass
+    def __init__(self, username, password, flag=1):
+        self.username = username
+        self.password = password
+        self.flag = flag
 
     def show_event(self, file_path):
         try:
@@ -30,7 +32,7 @@ class User:
             logging.exception('this is file error')
         # taghir konad
 
-    def show_detail(self, user_input):  #in show_event methods we can not see some of details
+    def show_detail(self, user_input):  # in show_event methods we can not see some of details
         try:
             with open("event.csv", mode='r') as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=',')
