@@ -50,7 +50,17 @@ class User:
         try:
             df_account = pd.read_csv(file_path)
             df_account_indexed = df_account.set_index("id_account", drop=True)
-            username_account = input("Please input username: ")
+            df_account = pd.read_csv("account.csv")
+            df_account_indexed = df_account.set_index("id_account", drop=True)
+            list_username = list(df_account_indexed["username"])
+            while True:
+                username_account = input("input your username: ")
+                if username_account not in list_username[1:]:
+                    print("add")
+                    break
+                else:
+                    print("your username duplicated ")
+            # username_account = input("Please input username: ")
             password_account = input("Please input password: ")
             print("Please select one of follow choice:")
             print("You are logging in as : \n1-STUDENT \n2-EMPLOYEE \n3-TEACHER \n")
@@ -87,20 +97,7 @@ class User:
 
 
     def log_in(self):
-        df_account = pd.read_csv("account.csv")
-        print(df_account)
-        df_account_indexed = df_account.set_index("id_account", drop=True)
-        print(df_account_indexed)
-        list_username = list(df_account_indexed["username"])
-        print(list_username[1:])
-        while True:
-            username = input("input your username: ")
-            if username not in list_username[1:]:
-                print("add")
-                break
-            else:
-                print("your username duplicated ")
-        password = input()
+        pass
 
 
 
