@@ -12,4 +12,4 @@ class Event:
         self.flag_event = flag_event
 
     def __str__(self):
-        return "event created"
+        return "create event successfully!"

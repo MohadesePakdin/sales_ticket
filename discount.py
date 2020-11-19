@@ -10,4 +10,4 @@ class Discount:
         self.darsad = darsad
 
     def __str__(self):
-        return "discount created"
+        return "create discount successfully!"
