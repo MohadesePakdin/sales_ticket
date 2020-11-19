@@ -9,9 +9,10 @@ logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %
 
 
 class User:
-    def __init__(self, username, password, flag=1):
+    def __init__(self, username, password,file_path, flag=1):
         self.username = username
         self.password = password
+        self.file_path=file_path
         self.flag = flag
 
     def show_event(self, file_path):

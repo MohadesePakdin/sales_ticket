@@ -13,9 +13,10 @@ from event import Event
 
 
 class Admin:
-    def __init__(self, username, password, flag=1):
+    def __init__(self, username, password,file_path, flag=1):
         self.username = username
         self.password = password
+        self.file_path=file_path
         self.flag = flag
 
     def login(self):
