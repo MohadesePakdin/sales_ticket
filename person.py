@@ -92,7 +92,11 @@ class Person:
 
 
     def show_event(self):
-        pass
+        df_first = pd.read_csv("event.csv")
+        df_first_2 = df_first[["Name_event", "Date_event", "Time_event", "place_event", "Cost_event", "Total_capacity",
+                               "Mod_total_capacity", "Flag_event"]].loc[1:, :]
+        print(df_first["Name_event", "Time_event", "Date_event", "place_event", "Cost_event", "Mod_total_capacity"])
+        # ye tabe inja baray hesab kardan bagye zarfiat?۲۳:۴۶
 
     def exit(self):
         sys.exit()
