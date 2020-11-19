@@ -1,15 +1,17 @@
 import logging
 import csv
+import sys
+
 import pandas as pd
 
-logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %(message)s')
+#logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %(message)s')
 
 
 # coloredlogs.install(fmt='%(asctime)s,%(msecs)03d %(hostname)s %(name)s[%(process)d] %(levelname)s %(message)s')
 
 
 class User:
-    def __init__(self, username, password, file_path, flag=1):
+    def __init__(self,  file_path,username=None, password=None, flag=1):# delete file_path because dont use from customer
         self.username = username
         self.password = password
         self.file_path = file_path
@@ -106,32 +108,66 @@ class User:
 
     def log_in(self):
 
-        df_account = pd.read_csv("account.csv")
-        df_account_indexed = df_account.set_index("id_account", drop=True)
-        list_username = list(df_account_indexed["username"])
-        while True:
-            input_username_login = input("input your username ")
-            if input_username_login not in list_username[1:]:
-                print("try again")
-            else:
-                list_password = list(df_account_indexed["password"])
-                input_userpass_login = input("input your password ")
-                # when username was ok give password 3 times
-                for i in range(3):
-                    if input_userpass_login not in list_password[1:]:
-                        print("try again")
-                    else:
-                        print("You logged in successful")
+        number_try = 3
+        while number_try > 0:  # baraye inke agar eshtebah vared kard dobare azash bkhad ke user pass bzne ya inke bre biron
+            print("input your username and password")
+            username = input("please enter your username: ")
+            password = input("please enter your password: ")
+            df_admin = pd.read_csv(self.file_path)
+            df_admin_indexed = df_admin.set_index("id_account", drop=True)
+            try:
+                if str(df_admin_indexed.iloc[
+                           df_admin_indexed.index[df_admin_indexed['username'] == username].tolist()[
+                               0] - 1, 1]) == password:
+                    # obj_admin = Admin()
+                    while True:
+                        print("please select one of follow choices:\n")
+                        print("1-show all active event \n"
+                              "2-show all event \n"
+                              "3-show all deactivate event\n"
+                              "4-create event \n"
+                              "4-remove event \n"
+                              "5-Exit ")
+                        try:
+                            admin_input_selected = int(input("enter your choice: "))
+                            if admin_input_selected in range(1, 6):
+                                if admin_input_selected == 1:
+                                    print("show_all_active_event()")
+                                    # Admin.show_event(Admin, 5)
+                                    # obj_admin.show_all_active_event()
+                                elif admin_input_selected == 2:
+                                    print("show_all_event()")
+                                    # obj_admin.show_all_event()
+                                elif admin_input_selected == 3:
+                                    print("show_all_deactive_event()")
+                                    # obj_admin.show_all_deactive_event()
+                                elif admin_input_selected == 4:
+                                    print("create_event()")
+                                    # obj_admin.create_event()
+                                elif admin_input_selected == 5:
+                                    print("exit()")
+                                    sys.exit()
+                            else:
+                                print("your input is not valid please select other choice")
+                        except ValueError:
+                            print("your input is not valid please select other choice")
+                        break
+            except IndexError:
+                if number_try > 1:
+                    print("your username or password is wrong please try again")
+                    number_try -= 1
                 else:
-                    print("OOPS You are blocked ")
+                    print("your username or password is wrong")
+                    number_try -= 1
+        else:
+            input("\n\nyou try upper than 3 times your account block print any key to exit: ")
+            sys.exit()
 
-                # parisa log in manager t ro neshunam midi
-                # show_event k taghir kard ro ham lotfan
 
-
-a = User()
+a = User("account.csv")
 # a.show_event("event.csv")
 # a.show_detail(2)
 # a.choose_event(2)
 # a.create_account()
+a.create_account()
 a.log_in()
