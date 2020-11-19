@@ -2,20 +2,25 @@
 import coloredlogs, logging
 import csv
 import pandas as pd
+#import person
 
 logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %(message)s')
 
 
 # coloredlogs.install(fmt='%(asctime)s,%(msecs)03d %(hostname)s %(name)s[%(process)d] %(levelname)s %(message)s')
 
-
+#show event , show detail , exit
 class User:
-    def __init__(self):
-        pass
+    def __init__(self,event_choice):
+        self.event_choice = event_choice
+
 
     def show_event(self, file_path):
         try:
-            with open("event.csv", mode='a+') as new_file:
+
+            #رویداد های موجود را کاربر هنگام ورود ببیند .
+
+            '''with open("event.csv", mode='a+') as new_file:
                 csv_writer = csv.writer(new_file, delimiter=',')
                 data = [["name_event", "date_event", "capasity", "time_event", "price"],
                         ["joker", "20nov", "100", "10:00", "10$"],
@@ -25,12 +30,14 @@ class User:
                     csv.reader(new_file)
                     print(row)
 
-            new_file.close()
+            new_file.close()'''
         except Exception:
             logging.exception('this is file error')
         # taghir konad
 
     def show_detail(self, user_input):  #in show_event methods we can not see some of details
+
+        #رویدادی را که انتخاب می کند جزییات بیشتری ازش ببیند : کارگردان-سال ساخت-مدت زمان برنامه-ژانر
         try:
             with open("event.csv", mode='r') as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=',')
@@ -41,15 +48,20 @@ class User:
         except Exception:
             logging.exception('this is file error')
 
-    def choose_event(self, input_user):
+    def choose_event(self):
+        #اگر متد قبلی فراخانی شده بود از کاربر بپرسه خروج یا برگشت یا خرید ؟
+
         # input_user = int(input("your selection : "))
-        with open("event.csv", 'r') as my_file:
-            reader = csv.reader(my_file)
-            rows = list(reader)
-            print("your selection is :", rows[input_user][0])
+        try :
+            with open("event.csv", 'r') as my_file:
+                reader = csv.reader(my_file)
+                rows = list(reader)
+                print("your selection is :", rows[self.event_choice][0])
+        except FileNotFoundError :
+            logging.exception('couldnt find event file')
 
     def create_account(self):
-
+        #کاربر اگر قصد خرید داشت یا باید وارد شود یا حساب کاربری بسازد
         file_path = "account.csv"
         try:
             df_account = pd.read_csv(file_path)
@@ -107,31 +119,44 @@ class User:
             logging.exception('not completely header in file')
 
     def log_in(self):
+        try :
+            df_account = pd.read_csv("account.csv")
+            df_account_indexed = df_account.set_index("id_account", drop=True)
+            list_username = list(df_account_indexed["username"])
+            number_try = 3
+            while number_try > 0:
+                input_username_login = input("input your username ")
+                if input_username_login not in list_username[1:]:
+                    print("try again")
+                else:
+                    list_password = list(df_account_indexed["password"])
+                    input_userpass_login = input("input your password ")
+                    # when username was ok give password 3 times
 
-        df_account = pd.read_csv("account.csv")
-        df_account_indexed = df_account.set_index("id_account", drop=True)
-        list_username = list(df_account_indexed["username"])
-        while True:
-            input_username_login = input("input your username ")
-            if input_username_login not in list_username[1:]:
-                print("try again")
-            else:
-                list_password = list(df_account_indexed["password"])
-                input_userpass_login = input("input your password ")
-                # when username was ok give password 3 times
-                for i in range(3):
                     if input_userpass_login not in list_password[1:]:
                         print("try again")
+                        number_try -= 1
                     else:
                         print("You logged in successful")
-                else:
-                    print("OOPS You are blocked ")
+                    # else:
+                    #     print("OOPS You are blocked ")
 
-                # parisa log in manager t ro neshunam midi
-                # show_event k taghir kard ro ham lotfan
+                    # parisa log in manager t ro neshunam midi
+                    # show_event k taghir kard ro ham lotfan
+        except FileNotFoundError :
+            logging.exception('coudent find account file')
+
+    def buy_ticket(self):
+        print("how many tickets do you want ?")
+        #tedade ticket ha
+        #ghimate kol : ...
+        #gheimat ba bon (daneshjoyee,karmandi,moalemi) : ...
+        print("Do you have off_code ?")
+        #if No pay/cancel
+        #if yes calculate last price
 
 
-a = User()
+a = User('k')
 # a.show_event("event.csv")
 # a.show_detail(2)
 # a.choose_event(2)
