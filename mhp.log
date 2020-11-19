@@ -29,3 +29,23 @@ Traceback (most recent call last):
     return lib.astype_intsafe(arr.ravel(), dtype).reshape(arr.shape)
   File "pandas/_libs/lib.pyx", line 615, in pandas._libs.lib.astype_intsafe
 ValueError: invalid literal for int() with base 10: '10$'
+2020-11-19 23:56:31,450 -- user.py -- this is file error
+Traceback (most recent call last):
+  File "/home/mohadese/PycharmProjects/sales_ticket/user.py", line 40, in show_detail
+    print(f"movie name :", (movies[user_input-1][1]), ", date_event:", (movies[user_input-1][2]), ", zarfiat:",
+IndexError: list index out of range
+2020-11-20 00:00:23,251 -- user.py -- this is file error
+Traceback (most recent call last):
+  File "/home/mohadese/PycharmProjects/sales_ticket/user.py", line 40, in show_detail
+    print(f"movie name :", (movies[user_input][1]), ", date_event:", (movies[user_input][2]), ", zarfiat:",
+IndexError: list index out of range
+2020-11-20 00:00:36,413 -- user.py -- this is file error
+Traceback (most recent call last):
+  File "/home/mohadese/PycharmProjects/sales_ticket/user.py", line 40, in show_detail
+    print(f"movie name :", (movies[user_input][1]), ", date_event:", (movies[user_input][2]), ", zarfiat:",
+IndexError: list index out of range
+2020-11-20 00:01:05,192 -- user.py -- this is file error
+Traceback (most recent call last):
+  File "/home/mohadese/PycharmProjects/sales_ticket/user.py", line 40, in show_detail
+    print(f"movie name :", (movies[user_input][1]), ", date_event:", (movies[user_input][2]), ", zarfiat:",
+IndexError: list index out of range
