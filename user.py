@@ -125,7 +125,7 @@ class User:
                     else:
                         print("You logged in successful")
                 else:
-                    print("OOPS You are blocked ")
+                    print("OOPS You are blocked !")
 
                 # parisa log in manager t ro neshunam midi
                 # show_event k taghir kard ro ham lotfan
