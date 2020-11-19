@@ -10,10 +10,8 @@ logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %
 
 
 class User:
-    def __init__(self,username,password):
-        self.username = username
-        self.password = password
-
+    def __init__(self):
+        pass
 
     def show_event(self, file_path):
         try:
@@ -127,7 +125,7 @@ class User:
                     else:
                         print("You logged in successful")
                 else:
-                    print("OOPS You are blocked !")
+                    print("OOPS You are blocked ")
 
                 # parisa log in manager t ro neshunam midi
                 # show_event k taghir kard ro ham lotfan

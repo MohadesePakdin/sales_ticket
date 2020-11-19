@@ -1,6 +1,5 @@
-id_u,name_event, date_event, time_event, place_event, cost_event,total_capacity, total_capacity,flag
+id_event,Name_event,Date_event,Time_event,place_event,Cost_event,Total_capacity,Mod_total_capacity,Flag_event
 0,
-joker,20nov,100,10:00,10$
-green book,21nov,100,10:00,12$
-taste of cherry,22nov,100,10:00,20$
-
+1,jashn,1399-08-26,1900-01-01,shiraz,10000,50,50,1
+2,jashn,1399-08-26,1900-01-01,shiraz,10000,50,50,1
+3,jashn,1399-08-26,1900-01-01,shiraz,10000,50,50,1
