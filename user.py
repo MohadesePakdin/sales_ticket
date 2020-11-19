@@ -1,5 +1,4 @@
-# import event
-import coloredlogs, logging
+import logging
 import csv
 import pandas as pd
 
@@ -10,8 +9,11 @@ logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %
 
 
 class User:
-    def __init__(self):
-        pass
+    def __init__(self, username, password, file_path, flag=1):
+        self.username = username
+        self.password = password
+        self.file_path = file_path
+        self.flag = flag
 
     def show_event(self, file_path):
         try:
@@ -30,7 +32,7 @@ class User:
             logging.exception('this is file error')
         # taghir konad
 
-    def show_detail(self, user_input):  #in show_event methods we can not see some of details
+    def show_detail(self, user_input):  # in show_event methods we can not see some of details
         try:
             with open("event.csv", mode='r') as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=',')
@@ -77,16 +79,12 @@ class User:
                         if input_user_type == 1:
                             print("shomare daneshjoye khod ra vared konid ")
                             type_account = "Student"  # 15%
-                            # azash shomare daneshjoyee nakhad ?? 123....
-                            # ta se bar azash code mikhaym age har se bar avalesh 123 nadasht dige 15% emal nmishe
                             break
                         elif input_user_type == 2:
                             type_account = "Employee"  # 10%
-                            # azash shomare karmandi nakhad ?? 456....
                             break
                         elif input_user_type == 3:
                             type_account = "Teacher"  # 10%
-                            # azash shomare moalemi nakhad ?? 789....
                             break
                         elif input_user_type == 4:
                             type_account = "Other"  # 0%
