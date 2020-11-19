@@ -13,3 +13,19 @@ Traceback (most recent call last):
   File "/home/mohadese/PycharmProjects/sales_ticket/user.py", line 33, in show_detail
     (movies[user_input][2]))
 IndexError: list index out of range
+2020-11-19 22:25:58,242 -- user.py -- this is file error
+Traceback (most recent call last):
+  File "/home/mohadese/PycharmProjects/sales_ticket/user.py", line 25, in show_event
+    df_first_2["Cost_event"] = df_first_2["Cost_event"].astype(int)
+  File "/home/mohadese/virtualEnvironments/sales_ticket/lib/python3.8/site-packages/pandas/core/generic.py", line 5546, in astype
+    new_data = self._mgr.astype(dtype=dtype, copy=copy, errors=errors,)
+  File "/home/mohadese/virtualEnvironments/sales_ticket/lib/python3.8/site-packages/pandas/core/internals/managers.py", line 595, in astype
+    return self.apply("astype", dtype=dtype, copy=copy, errors=errors)
+  File "/home/mohadese/virtualEnvironments/sales_ticket/lib/python3.8/site-packages/pandas/core/internals/managers.py", line 406, in apply
+    applied = getattr(b, f)(**kwargs)
+  File "/home/mohadese/virtualEnvironments/sales_ticket/lib/python3.8/site-packages/pandas/core/internals/blocks.py", line 595, in astype
+    values = astype_nansafe(vals1d, dtype, copy=True)
+  File "/home/mohadese/virtualEnvironments/sales_ticket/lib/python3.8/site-packages/pandas/core/dtypes/cast.py", line 974, in astype_nansafe
+    return lib.astype_intsafe(arr.ravel(), dtype).reshape(arr.shape)
+  File "pandas/_libs/lib.pyx", line 615, in pandas._libs.lib.astype_intsafe
+ValueError: invalid literal for int() with base 10: '10$'

@@ -16,24 +16,21 @@ class User:
 
 
     def show_event(self, file_path):
+
         try:
 
-            #رویداد های موجود را کاربر هنگام ورود ببیند .
+            df_first = pd.read_csv("event.csv")
+            df_first_2 = df_first[
+                ["Name_event", "Date_event", "Time_event", "place_event", "Cost_event","Mod_total_capacity" ]].loc[1:, :]
+            df_first_2["Cost_event"] = df_first_2["Cost_event"].astype(int)
+            df_first_2["Mod_total_capacity"] = df_first_2["Mod_total_capacity"].astype(int)
+            pd.set_option('display.max_columns', None)
+            print(df_first_2)
 
-            '''with open("event.csv", mode='a+') as new_file:
-                csv_writer = csv.writer(new_file, delimiter=',')
-                data = [["name_event", "date_event", "capasity", "time_event", "price"],
-                        ["joker", "20nov", "100", "10:00", "10$"],
-                        ["green book", "21nov", "100", "10:00", "12$"],
-                        ["taste of cherry", "22nov", "100", "10:00", "20$"]]
-                for row in data:
-                    csv.reader(new_file)
-                    print(row)
 
-            new_file.close()'''
         except Exception:
             logging.exception('this is file error')
-        # taghir konad
+
 
     def show_detail(self, user_input):  #in show_event methods we can not see some of details
 
@@ -157,8 +154,8 @@ class User:
 
 
 a = User('k')
-# a.show_event("event.csv")
+a.show_event("event.csv")
 # a.show_detail(2)
 # a.choose_event(2)
 # a.create_account()
-a.log_in()
+# a.log_in()
