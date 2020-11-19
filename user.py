@@ -2,7 +2,7 @@ import logging
 import csv
 import pandas as pd
 
-logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %(message)s')
+#logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %(message)s')
 
 
 # coloredlogs.install(fmt='%(asctime)s,%(msecs)03d %(hostname)s %(name)s[%(process)d] %(levelname)s %(message)s')
