@@ -116,7 +116,7 @@ class Admin:
                   "row with this items (id_event,Name_event,Date_event,Time_event,"
                   "place_event,Cost_event,Total_capacity,Mod_total_capacity,Flag_event)"
                   "and second row with this item (0,) without parenthesis ")
-        obj_event.create_event()
+        #obj_event.create_event()
 
     def add_discount(self):
         pass
