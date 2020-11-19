@@ -1,0 +1,15 @@
+2020-11-17 22:13:12,594 -- run.py -- this is file error
+Traceback (most recent call last):
+  File "/home/mohadese/PycharmProjects/sales_ticket/run.py", line 30, in show_detail
+    with open("eventss.csv", mode='r') as csv_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'eventss.csv'
+2020-11-18 14:50:30,358 -- user.py -- this is file error
+Traceback (most recent call last):
+  File "/home/mohadese/PycharmProjects/sales_ticket/user.py", line 30, in show_detail
+    with open("eventss.csv", mode='r') as csv_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'eventss.csv'
+2020-11-18 18:02:54,205 -- user.py -- this is file error
+Traceback (most recent call last):
+  File "/home/mohadese/PycharmProjects/sales_ticket/user.py", line 33, in show_detail
+    (movies[user_input][2]))
+IndexError: list index out of range
