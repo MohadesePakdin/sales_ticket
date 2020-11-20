@@ -95,6 +95,8 @@ class Admin(Person):
             total_capacity, mod_total_capacity = input("Enter total capacity of event: ")
             obj_event = Event(df_events_indexed.index[-1] + 1, name_event, date_event, time_event, place_event,
                               cost_event, total_capacity, mod_total_capacity, 1)
+            obj_event.create_event()
+
         # if file not fount
         except FileNotFoundError:
             print("you have not this file please create a file with name event.csv and set first "
@@ -179,7 +181,6 @@ class Admin(Person):
 
 
     def deactive_event(self):
-        #
         # open csv file
         with open("event.csv", "r") as csv_file:
             csv_reader = csv.DictReader(csv_file, delimiter=',')

@@ -1,65 +1,69 @@
-import logging
 import csv
-import sys
-
+import logging
 import pandas as pd
+from person import Person
 
-#logging.basicConfig(filename='mhp.log', format='%(asctime)s -- %(filename)s -- %(message)s')
+LOG_FORMAT = "%(levelname)s  %(filename)s %(message)s"
+logging.basicConfig(filename='mhp.log', level = logging.DEBUG , filemode='w')
+logger = logging.getLogger('LOG')
 
 
-# coloredlogs.install(fmt='%(asctime)s,%(msecs)03d %(hostname)s %(name)s[%(process)d] %(levelname)s %(message)s')
+class User(Person):
+    def __init__(self, event_choice, status):
+        super().__init__(status)
+        self.event_choice = event_choice
 
+    # def show_event(self):
+    #
+    #     try:
+    #
+    #         df_first = pd.read_csv("event.csv")
+    #         df_first_2 = df_first[
+    #                          ["Name_event", "Date_event", "Time_event", "place_event", "Cost_event",
+    #                           "Mod_total_capacity"]].loc[1:, :]
+    #         df_first_2["Cost_event"] = df_first_2["Cost_event"].astype(int)
+    #         df_first_2["Mod_total_capacity"] = df_first_2["Mod_total_capacity"].astype(int)
+    #         pd.set_option('display.max_columns', None)
+    #         print(df_first_2)
+    #
+    #
+    #     except Exception:
+    #         logging.exception('this is file error')
 
-class User:
-    def __init__(self,  file_path,username=None, password=None, flag=1):# delete file_path because dont use from customer
-        self.username = username
-        self.password = password
-        self.file_path = file_path
-        self.flag = flag
+    # def show_details_event(self, index_event):  # in show_event methods we can not see some of details
+    #     try:
+    #         pd.set_option('display.max_columns', None)
+    #         df_first = pd.read_csv("event.csv")
+    #         df_first_2 = df_first[
+    #                          [ "Name_event", "Date_event", "Time_event", "place_event", "Cost_event",
+    #                           "Mod_total_capacity",]].loc[1:, :]
+    #         df_first_3 = df_first_2.loc[[index_event]]
+    #         df_first_3["Cost_event"] = df_first_3["Cost_event"].astype(int)
+    #         df_first_3["Mod_total_capacity"] = df_first_3["Mod_total_capacity"].astype(int)
+    #         df_first_3["Total_capacity"] = df_first_3["Total_capacity"].astype(int)
+    #         print(df_first_3.loc[[index_event]])
+    #
+    #     except Exception:
+    #         logging.exception('this is file error')
 
-    def show_event(self, file_path):
-        try:
-            with open("event.csv", mode='a+') as new_file:
-                csv_writer = csv.writer(new_file, delimiter=',')
-                data = [["name_event", "date_event", "capasity", "time_event", "price"],
-                        ["joker", "20nov", "100", "10:00", "10"],
-                        ["green book", "21nov", "100", "10:00", "12"],
-                        ["taste of cherry", "22nov", "100", "10:00", "20"]]
-                for row in data:
-                    csv.reader(new_file)
-                    print(row)
+    def choose_event(self):
+        # اگر متد قبلی فراخانی شده بود از کاربر بپرسه خروج یا برگشت یا خرید ؟
 
-            new_file.close()
-        except Exception:
-            logging.exception('this is file error')
-        # taghir konad
-
-    def show_detail(self, user_input):  # in show_event methods we can not see some of details
-        try:
-            with open("event.csv", mode='r') as csv_file:
-                csv_reader = csv.reader(csv_file, delimiter=',')
-                movies = [movie for movie in csv_reader]
-                print(f"movie name :", (movies[user_input][0]), ", date_event:", (movies[user_input][1]), ", zarfiat:",
-                      (movies[user_input][2]))
-
-        except Exception:
-            logging.exception('this is file error')
-
-    def choose_event(self, input_user):
         # input_user = int(input("your selection : "))
-        with open("event.csv", 'r') as my_file:
-            reader = csv.reader(my_file)
-            rows = list(reader)
-            print("your selection is :", rows[input_user][0])
+        try:
+            with open("event.csv", 'r') as my_file:
+                reader = csv.reader(my_file)
+                rows = list(reader)
+                print("your selection is :", rows[self.event_choice][0])
+        except FileNotFoundError:
+            logging.exception('couldnt find event file')
 
     def create_account(self):
-
+        # کاربر اگر قصد خرید داشت یا باید وارد شود یا حساب کاربری بسازد
         file_path = "account.csv"
         try:
             df_account = pd.read_csv(file_path)
             df_account_indexed = df_account.set_index("id_account", drop=True)
-            # df_account = pd.read_csv("account.csv")
-            # df_account_indexed = df_account.set_index("id_account", drop=True)
             list_username = list(df_account_indexed["username"])
             while True:
                 username_account = input("input your username: ")
@@ -68,34 +72,37 @@ class User:
                     break
                 else:
                     print("Your name has already been entered with this username TRY ANOTHER ONE . ")
-            # username_account = input("Please input username: ")
             password_account = input("Please input password: ")
             print("Please select one of follow choice:")
             print("You are logging in as : \n1-STUDENT \n2-EMPLOYEE \n3-TEACHER \n4-OTHER")
-            # in future we want
             while True:
                 # USER HAS TO INPUT ONE OF THEM
                 try:
                     input_user_type = int(input("1 or 2 or 3: "))
                     if input_user_type in [1, 2, 3, 4]:
                         if input_user_type == 1:
-                            print("shomare daneshjoye khod ra vared konid ")
-                            type_account = "Student"  # 15%
+                            print("enter your id student: ")
+                            type_account = "Student"
+                            percent = 15
                             break
                         elif input_user_type == 2:
-                            type_account = "Employee"  # 10%
+                            type_account = "Employee"
+                            percent = 10
                             break
                         elif input_user_type == 3:
-                            type_account = "Teacher"  # 10%
+                            type_account = "Teacher"
+                            percent = 12
                             break
                         elif input_user_type == 4:
-                            type_account = "Other"  # 0%
+                            type_account = "Other"
+                            percent = 0
                             break
                     else:
                         print("Your input is INVALID please try again. ")
                 except Exception:
                     print("Your input is INVALID please try again. ")
-            row_account = [[df_account_indexed.index[-1] + 1, username_account, str(password_account), type_account, 1]]
+            row_account = [
+                [df_account_indexed.index[-1] + 1, username_account, str(password_account), type_account, percent, 1]]
 
             with open(file_path, 'a', newline='') as csv_account:
                 csv_writer = csv.writer(csv_account)
@@ -106,68 +113,80 @@ class User:
                   "(id_account,username,password,flag)and second row with this item (0,) without parenthesis")
             logging.exception('not completely header in file')
 
-    def log_in(self):
-
-        number_try = 3
-        while number_try > 0:  # baraye inke agar eshtebah vared kard dobare azash bkhad ke user pass bzne ya inke bre biron
-            print("input your username and password")
-            username = input("please enter your username: ")
-            password = input("please enter your password: ")
-            df_admin = pd.read_csv(self.file_path)
-            df_admin_indexed = df_admin.set_index("id_account", drop=True)
-            try:
-                if str(df_admin_indexed.iloc[
-                           df_admin_indexed.index[df_admin_indexed['username'] == username].tolist()[
-                               0] - 1, 1]) == password:
-                    # obj_admin = Admin()
-                    while True:
-                        print("please select one of follow choices:\n")
-                        print("1-show all active event \n"
-                              "2-show all event \n"
-                              "3-show all deactivate event\n"
-                              "4-create event \n"
-                              "4-remove event \n"
-                              "5-Exit ")
-                        try:
-                            admin_input_selected = int(input("enter your choice: "))
-                            if admin_input_selected in range(1, 6):
-                                if admin_input_selected == 1:
-                                    print("show_all_active_event()")
-                                    # Admin.show_event(Admin, 5)
-                                    # obj_admin.show_all_active_event()
-                                elif admin_input_selected == 2:
-                                    print("show_all_event()")
-                                    # obj_admin.show_all_event()
-                                elif admin_input_selected == 3:
-                                    print("show_all_deactive_event()")
-                                    # obj_admin.show_all_deactive_event()
-                                elif admin_input_selected == 4:
-                                    print("create_event()")
-                                    # obj_admin.create_event()
-                                elif admin_input_selected == 5:
-                                    print("exit()")
-                                    sys.exit()
-                            else:
-                                print("your input is not valid please select other choice")
-                        except ValueError:
-                            print("your input is not valid please select other choice")
-                        break
-            except IndexError:
-                if number_try > 1:
-                    print("your username or password is wrong please try again")
-                    number_try -= 1
-                else:
-                    print("your username or password is wrong")
-                    number_try -= 1
-        else:
-            input("\n\nyou try upper than 3 times your account block print any key to exit: ")
-            sys.exit()
+    def buy_ticket(self, user_choice):
+        many_of_ticket = int(input("how many tickets do you want? "))
+        df_first = pd.read_csv("event.csv")
+        df_first_2 = df_first[
+                         ["id_event", "Name_event", "Date_event", "Time_event", "place_event", "Cost_event",
+                          "Total_capacity", "Mod_total_capacity", "Flag_event"]].loc[1:, :]
+        cost=df_first_2.iloc[user_choice]["Cost_event"]
+        mod_capacity=df_first_2.iloc[user_choice]["Mod_total_capacity"]
+         if mod_capacity>1:
+            # nemayesh gheymat
+            # access  a specific few rows/columns from DataFrame
+            cap=df_first.loc[df_first["id_event"] == user_choice, "Flag_event"]
+            df_first.loc[df_first["id_event"] == user_choice, "Flag_event"] = cap-1
+            # Write object to a (csv) file
+            df_first.to_csv("event.csv", index=False)
+         else:
+             print("this event dont have cpacity ")
 
 
-a = User("account.csv")
-# a.show_event("event.csv")
-# a.show_detail(2)
-# a.choose_event(2)
-# a.create_account()
-a.create_account()
-a.log_in()
+        # try :
+        #     many_of_ticket = int(input("how many tickets do you want? "))
+        #     df_account = pd.read_csv("event.csv")
+        #     df_account_indexed = df_account.set_index("id_event", drop=True)
+        #     prices = [price for price in df_account]
+        #     logger.info("we give price of events from price column in event file .")
+        #     price_of_event = prices[user_choice][5]
+        #     price_of_event = many_of_ticket * price_of_event
+        #     df_account2 = pd.read_csv("account.csv")
+        #     df_account_indexed = df_account.set_index("id_account", drop=True)
+        #     logger.info("we give percent of jobs from account file .")
+        #     darsaad = [darsad for darsad in df_account2]
+        #     percent_of_job = darsaad[user_choice][4]
+        #     print("your total payment is : ", price_of_event - (1 / percent_of_job) * price_of_event)
+        #     print("Do you have any off code ? (if yes please input it ) ")
+        #     number_try = 3
+        #     while number_try > 0:
+        #         input_user_off_code = input()
+        #         if input_user_off_code == 'no':
+        #             input_user_want_to_buy_or_not = input("Do you want to continue paying ? y/n")
+        #             if input_user_want_to_buy_or_not == 'y':
+        #                 print("-----------------shaparak------------------")
+        #                 mod_of_capacity = prices[user_choice][7]-1
+        #             else:
+        #                 print("back to menu")  # how to call menu method ????????
+        #         df = pd.read_csv("discount.csv")
+        #         df_indexed = df.set_index("name_discount", drop=True)
+        #         list_username = list(df_account_indexed["name_discount"])
+        #         logger.info("we check code from discount file .")
+        #         darsaadd2 = [darsad2 for darsad2 in df]
+        #         percent_of_code = darsaadd2[user_choice][2]
+        #         if input_user_off_code not in list_username[1:]:
+        #             print("your input code is not defined !")
+        #             number_try -= 1
+        #             break
+        #         else:
+        #             print("your total payment is : ", price_of_event - (1 / percent_of_job) * price_of_event - (1 / percent_of_code) * price_of_event)
+        #
+        #     print("Do you want to continue paying ? y/n ")
+        #     input_user_want_to_buy_or_not = input()
+        #     logger.info("if user wants to buy ticket we will call shaparak .")
+        #     if input_user_want_to_buy_or_not == 'y':
+        #         print("-----------------shaparak-------------------")
+        #         mod_of_capacity = prices[user_choice][7] - 1
+        #     else:
+        #         print("back to menu")  # how to call menu method ????????
+        #
+        # except ValueError :
+        #     print("INVALID input.")
+        # except KeyError :
+        #     logger.error("Not found in index .")
+    @classmethod
+    def menu_user(self):
+        print("1-show events \n2-choose event \n3-create account \n4-log in \n")
+
+obj=User(2,"A")
+# print(obj.show_details_event(1))
+obj.buy_ticket(2)
