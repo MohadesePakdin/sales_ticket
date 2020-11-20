@@ -13,7 +13,7 @@ from termcolor import colored
 from discount import Discount
 from event import Event
 import pandas as pd
-from termcolor import colored
+# from termcolor import colored
 
 from person import Person
 import logging
@@ -33,8 +33,8 @@ class Admin(Person):
         try:
             df= pd.read_csv(file_path)
             df_indexed = df.set_index("id_account", drop=True)# id_admin
-            # df_account = pd.read_csv("account.csv")
-            # df_account_indexed = df_account.set_index("id_account", drop=True)
+            df_account = pd.read_csv("account.csv")
+            df_account_indexed = df_account.set_index("id_account", drop=True)
             list_username = list(df_indexed["username"])
             while True:
                 username_account = input("input your username: ")
@@ -45,10 +45,10 @@ class Admin(Person):
                     print("Your name has already been entered with this username TRY ANOTHER ONE . ")
             # username_account = input("Please input username: ")
             password_account = input("Please input password: ")
-            print("Please select one of follow choice:")
-            print("You are logging in as : \n1-STUDENT \n2-EMPLOYEE \n3-TEACHER \n4-OTHER")
 
-            row_account = [[df_indexed.index[-1] + 1, username_account, str(password_account), type_account, 1]]
+
+
+            row_account = [[df_indexed.index[-1] + 1, username_account, str(password_account), 1]]
 
             with open(file_path, 'a', newline='') as csv_account:
                 csv_writer = csv.writer(csv_account)
@@ -79,14 +79,17 @@ class Admin(Person):
                     break
                 except ValueError:
                     print("your date event is not valid please input with this format: 1399/08/26")
-                    logger.error("not valid")
+                    logger.error("invalid Error. There was an error in your input: please follow the format.")
+
             while True:
                 try:
                     time_event = str(datetime.strptime(input('Enter time of event with this format 20:00 : '),
                                                        "%H:%M")).split()[1]
+                    logger.info("")
                     break
                 except ValueError:
                     print("your time event is not valid please input with this format", colored("20:00", "red"))
+                    logger.error("invalid Error. There was an error in your input: please follow the format.")
             place_event = input("Enter place of event: ")
             cost_event = input("Enter cost of event in Rial: ")
             total_capacity, mod_total_capacity = input("Enter total capacity of event: ")
@@ -98,6 +101,7 @@ class Admin(Person):
                   "row with this items (id_event,Name_event,Date_event,Time_event,"
                   "place_event,Cost_event,Total_capacity,Mod_total_capacity,Flag_event)"
                   "and second row with this item (0,) without parenthesis ")
+            logger.error("")
 
 
 
@@ -190,4 +194,6 @@ class Admin(Person):
 
 
 obj_user = Admin()
+# obj_admin = Event()
 a = obj_user.remove_event()
+b = obj_user.active_evevnt()
