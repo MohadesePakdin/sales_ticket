@@ -16,7 +16,9 @@ import pandas as pd
 from termcolor import colored
 
 from person import Person
-
+import logging
+# #creat and configure logger
+logger = logging.getLogger()
 
 class Admin(Person):
     def __init__(self, status, username=None, password=None, flag=1):
@@ -27,10 +29,57 @@ class Admin(Person):
 
 
     def signup(self):
+        file_path = "account.csv"# admin.csv
+        try:
+            df= pd.read_csv(file_path)
+            df_indexed = df.set_index("id_account", drop=True)# id_admin
+            # df_account = pd.read_csv("account.csv")
+            # df_account_indexed = df_account.set_index("id_account", drop=True)
+            list_username = list(df_indexed["username"])
+            while True:
+                username_account = input("input your username: ")
+                if username_account not in list_username[1:]:
+                    print("Your username is created then submit your password . ")
+                    break
+                else:
+                    print("Your name has already been entered with this username TRY ANOTHER ONE . ")
+            # username_account = input("Please input username: ")
+            password_account = input("Please input password: ")
+            # print("Please select one of follow choice:")
+            # print("You are logging in as : \n1-STUDENT \n2-EMPLOYEE \n3-TEACHER \n4-OTHER")
+            # in future we want
+            # while True:
+            #     input_user_type = input("1 or 2 or 3: ")
+            #     try:
+            #         input_user_type_int=int(input_user_type)
+            #         if input_user_type_int in [1, 2, 3, 4]:
+            #             if input_user_type_int == 1:
+            #                 type_account = "Student"
+            #                 break
+            #             elif input_user_type_int == 2:
+            #                 type_account = "Employee"
+            #                 break
+            #             elif input_user_type_int == 3:
+            #                 type_account = "Teacher"
+            #                 break
+            #             elif input_user_type_int == 4:
+            #                 type_account = "Other"
+            #                 break
+            #         else:
+            #             print("Your input is INVALID please try again. ")
+            #
+            #     except ValueError:
+            #         print("Your input is INVALID please try again. ")
+            # row_account = [[df_indexed.index[-1] + 1, username_account, str(password_account), type_account, 1]]
 
-
-
-        pass
+            # with open(file_path, 'a', newline='') as csv_account:
+            #     csv_writer = csv.writer(csv_account)
+            #     # writing the data row
+            #     csv_writer.writerows(row_account)
+        except Exception:
+            print("you have not this file please create a file with name account.csv and set first row with this items "
+                  "(id_account,username,password,flag)and second row with this item (0,) without parenthesis")
+            # logging.exception('not completely header in file')
 
     def add_event(self):
         # we have a csv file at first and csv file have 2 static record that dont delete this first row is my attribute
@@ -52,6 +101,7 @@ class Admin(Person):
                     break
                 except ValueError:
                     print("your date event is not valid please input with this format: 1399/08/26")
+                    logger.error("not valid")
             while True:
                 try:
                     time_event = str(datetime.strptime(input('Enter time of event with this format 20:00 : '),
@@ -86,14 +136,16 @@ class Admin(Person):
                 df_first.loc[df_first["id_event"]==id_remove,"Flag_event"]=0
                 #Write object to a (csv) file
                 df_first.to_csv("event.csv", index=False)
+                logger.info("event %s is removed." % id_remove)
 
             except EOFError:
                 # raised when a built-in function  do not read any data before encountering
-                print("File is empty. You must add a film first before you can remove it.")
-
+                print("File is empty. You must add a event first before you can remove it.")
+                logger.error("File is empty")
             except KeyError:
                 #raised when you try to access a key that dose not exist
                 print("That event doesn't exist.")
+                logger.error("doesn't exist")
 
             df = pd.read_csv(r"event.csv")
             print(df)
@@ -127,6 +179,7 @@ class Admin(Person):
                   "row with this items (id_event,Name_event,Date_event,Time_event,"
                   "place_event,Cost_event,Total_capacity,Mod_total_capacity,Flag_event)"
                   "and second row with this item (0,) without parenthesis ")
+            logger.error("file not fount")
 
 
     def active_evevnt(self):
@@ -136,9 +189,12 @@ class Admin(Person):
             csv_reader = csv.DictReader(csv_file, delimiter=',')
             #In this loop we want to display events whose flag is 1
             for lines in csv_reader:
-                print(lines['id_event'], lines['Name_event'],lines['Date_event'],lines['Time_event'],
-                      lines['place_event'],lines['Cost_event'],lines['Total_capacity'],lines['Mod_total_capacity'],
-                      lines['Flag_event']==1)
+                obj_event = Event(lines['id_event'], lines['Name_event'],lines['Date_event'],lines['Time_event'],
+                    lines['place_event'],lines['Cost_event'],lines['Total_capacity'],lines['Mod_total_capacity'],
+                    lines['Flag_event'])
+                if obj_event.flag_event == 1:
+                    print(obj_event)
+
 
     def deactive_event(self):
         #
@@ -147,9 +203,12 @@ class Admin(Person):
             csv_reader = csv.DictReader(csv_file, delimiter=',')
             # In this loop we want to display events whose flag is 1
             for lines in csv_reader:
-                print(lines['id_event'], lines['Name_event'], lines['Date_event'], lines['Time_event'],
-                      lines['place_event'], lines['Cost_event'], lines['Total_capacity'], lines['Mod_total_capacity'],
-                      lines['Flag_event'] == 0)
+                obj_event = Event(lines['id_event'], lines['Name_event'], lines['Date_event'], lines['Time_event'],
+                                  lines['place_event'], lines['Cost_event'], lines['Total_capacity'],
+                                  lines['Mod_total_capacity'],
+                                  lines['Flag_event'])
+                if obj_event.flag_event == 0:
+                    print(obj_event)
 
 
 obj_user = Admin()
