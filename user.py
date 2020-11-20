@@ -24,7 +24,7 @@ class User:
                 data = [["name_event", "date_event", "capasity", "time_event", "price"],
                         ["joker", "20nov", "100", "10:00", "10$"],
                         ["green book", "21nov", "100", "10:00", "12$"],
-                        ["taste of cherry", "22nov", "100", "10:00", "20$"]]
+                        ["taste of c herry", "22nov", "100", "10:00", "20$"]]
                 for row in data:
                     csv.reader(new_file)
                     print(row)

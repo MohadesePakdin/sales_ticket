@@ -13,10 +13,9 @@ from event import Event
 
 
 class Admin:
-    def __init__(self, username, password,file_path, flag=1):
+    def __init__(self, username=None, password=None, flag=1):
         self.username = username
         self.password = password
-        self.file_path=file_path
         self.flag = flag
 
     def login(self):
@@ -38,8 +37,8 @@ class Admin:
                               "2-show all event \n"
                               "3-show all deactivate event\n"
                               "4-create event \n"
-                              "4-remove event \n"
-                              "5-Exit ")
+                              "5-remove event \n"
+                              "6-Exit ")
                         try:
                             admin_input_selected = int(input("enter your choice: "))
                             if admin_input_selected in range(1, 6):
@@ -120,3 +119,14 @@ class Admin:
 
     def add_discount(self):
         pass
+    def menu(self):
+        print("please select one of follow choices:\n")
+        print("1-show all active event \n"
+              "2-show all event \n"
+              "3-show all deactivate event\n"
+              "4-create event \n"
+              "4-remove event \n"
+              "5-Exit ")
+
+a=Admin()
+a.add_event()
