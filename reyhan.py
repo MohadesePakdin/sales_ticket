@@ -6,3 +6,9 @@ logging.basicConfig(filename= "info.log",
 logging.basicConfig(filename= "info.error",
                      level=logging.ERROR,
                      format=LOG_FORMAT)
+logging.basicConfig(filename= "info.warning",
+                     level=logging.WARNING,
+                     format=LOG_FORMAT)
+
+
+

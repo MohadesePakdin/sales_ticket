@@ -3,6 +3,7 @@ from event import Event
 import pandas as pd
 
 
+
 class Discount:
     def __init__(self, id_discount, name_discount, darsad):
         self.id_discount = id_discount
