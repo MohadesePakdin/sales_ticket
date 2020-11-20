@@ -1,2 +1,8 @@
-INFO:LOG:we give price of events from price column in event file .
 ERROR:LOG:Not found in index .
+ERROR:LOG:Not found in index .
+ERROR:LOG:Not found in index .
+ERROR:LOG:Not found in index .
+ERROR:LOG:Not found in index .
+20-Nov-20 21:17:16 ERROR user.py Not found in index .
+20-Nov-20 21:23:49 ERROR user.py Not found in index .
+20-Nov-20 21:24:43 ERROR user.py Not found in index .

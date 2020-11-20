@@ -1,5 +1,5 @@
 import sys
-
+from user import User
 import pandas as pd
 
 print("-----------------------------------------------------------------------------------")
@@ -76,6 +76,7 @@ while True:
                         # log warning
 
             elif user_input_selected == 2:
+                user_object = User('u','l')
                 while True:
                     print("show event")  # invoke a method from user class
                     print("do you want sale a event:\n1-yes\n2-no")
