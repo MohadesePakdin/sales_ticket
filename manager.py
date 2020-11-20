@@ -45,37 +45,15 @@ class Admin(Person):
                     print("Your name has already been entered with this username TRY ANOTHER ONE . ")
             # username_account = input("Please input username: ")
             password_account = input("Please input password: ")
-            # print("Please select one of follow choice:")
-            # print("You are logging in as : \n1-STUDENT \n2-EMPLOYEE \n3-TEACHER \n4-OTHER")
-            # in future we want
-            # while True:
-            #     input_user_type = input("1 or 2 or 3: ")
-            #     try:
-            #         input_user_type_int=int(input_user_type)
-            #         if input_user_type_int in [1, 2, 3, 4]:
-            #             if input_user_type_int == 1:
-            #                 type_account = "Student"
-            #                 break
-            #             elif input_user_type_int == 2:
-            #                 type_account = "Employee"
-            #                 break
-            #             elif input_user_type_int == 3:
-            #                 type_account = "Teacher"
-            #                 break
-            #             elif input_user_type_int == 4:
-            #                 type_account = "Other"
-            #                 break
-            #         else:
-            #             print("Your input is INVALID please try again. ")
-            #
-            #     except ValueError:
-            #         print("Your input is INVALID please try again. ")
-            # row_account = [[df_indexed.index[-1] + 1, username_account, str(password_account), type_account, 1]]
+            print("Please select one of follow choice:")
+            print("You are logging in as : \n1-STUDENT \n2-EMPLOYEE \n3-TEACHER \n4-OTHER")
 
-            # with open(file_path, 'a', newline='') as csv_account:
-            #     csv_writer = csv.writer(csv_account)
-            #     # writing the data row
-            #     csv_writer.writerows(row_account)
+            row_account = [[df_indexed.index[-1] + 1, username_account, str(password_account), type_account, 1]]
+
+            with open(file_path, 'a', newline='') as csv_account:
+                csv_writer = csv.writer(csv_account)
+                # writing the data row
+                csv_writer.writerows(row_account)
         except Exception:
             print("you have not this file please create a file with name account.csv and set first row with this items "
                   "(id_account,username,password,flag)and second row with this item (0,) without parenthesis")
