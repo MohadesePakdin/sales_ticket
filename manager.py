@@ -4,17 +4,11 @@ import csv
 # from event import Event
 from datetime import datetime
 
-# this library is read a csv file in dataframe format
 import pandas as pd
-# use this library for colored code
-
 from termcolor import colored
 
 from discount import Discount
 from event import Event
-import pandas as pd
-from termcolor import colored
-
 from person import Person
 
 
@@ -25,11 +19,34 @@ class Admin(Person):
         self.password = password
         self.flag = flag
 
+    @staticmethod
+    def signup():
+        file_path = "manager.csv"
+        try:
+            df = pd.read_csv(file_path)
+            df_indexed = df.set_index("id_manager", drop=True)  # id_admin
+            # df_account = pd.read_csv("account.csv")
+            # df_account_indexed = df_account.set_index("id_account", drop=True)
+            list_username = list(df_indexed["username"])
+            while True:
+                username_account = input("input your username: ")
+                if username_account not in list_username[1:]:
+                    print("Your username is created then submit your password . ")
+                    break
+                else:
+                    print("Your name has already been entered with this username TRY ANOTHER ONE . ")
+            # username_account = input("Please input username: ")
+            password_account = input("Please input password: ")
+            row_account = [[df_indexed.index[-1] + 1, username_account, str(password_account), 1]]
+            with open(file_path, 'a', newline='') as csv_account:
+                csv_writer = csv.writer(csv_account)
+                csv_writer.writerows(row_account)
+        except FileNotFoundError:
+            print("you have not this file please create a file with name account.csv and set first row with this items "
+                  "(id_manager,username,password,flag)and second row with this item (0,) without parenthesis")
 
-    def signup(self):
-        pass
-
-    def add_event(self):
+    @staticmethod
+    def add_event():
         # we have a csv file at first and csv file have 2 static record that dont delete this first row is my attribute
         # and second row is set first id and add them in future record
         # load csv file
@@ -61,6 +78,7 @@ class Admin(Person):
             total_capacity, mod_total_capacity = input("Enter total capacity of event: ")
             obj_event = Event(df_events_indexed.index[-1] + 1, name_event, date_event, time_event, place_event,
                               cost_event, total_capacity, mod_total_capacity, 1)
+            obj_event.create_event()
         # if file not fount
         except FileNotFoundError:
             print("you have not this file please create a file with name event.csv and set first "
@@ -68,37 +86,21 @@ class Admin(Person):
                   "place_event,Cost_event,Total_capacity,Mod_total_capacity,Flag_event)"
                   "and second row with this item (0,) without parenthesis ")
 
-
-
-
-    def remove_event(self, df_first=None):
-        id_remove=int(input("please enter row for delete: "))
-
+    @staticmethod
+    def remove_event():
+        id_remove = int(input("please enter row for delete: "))
         while True:
             try:
-
                 df_first = pd.read_csv("event.csv")
-                df_first.loc[df_first["id_event"]==id_remove,"Flag_event"]=0
+                df_first.loc[df_first["id_event"] == id_remove, "Flag_event"] = 0
                 df_first.to_csv("event.csv", index=False)
-
             except EOFError:
                 print("File is empty. You must add a film first before you can remove it.")
-
             except KeyError:
                 print("That event doesn't exist.")
 
-            df = pd.read_csv(r"event.csv")
-            print(df)
-
-
-
-            keepLooping = input("\nAnother evet to delete? y/n: ")
-            if keepLooping == "n":
-                break
-
-
-
-    def add_discount(self):
+    @staticmethod
+    def add_discount():
         # we have a csv file at first and csv file have 2 static record that dont delete this first row is my attribute
         # and second row is set first id and add them in future record
         # load csv file
@@ -112,19 +114,12 @@ class Admin(Person):
             name_discount = input("Enter name of discount: ")
             # this while is for that we input correct answer to dataset
 
+            percent = input("Enter percent of discount: ")
 
-            darsad= input("Enter darsad of discount: ")
-
-            obj_discount = Discount(df_discount_indexed.index[-1] + 1, name_discount, darsad)
-        # if file not fount
+            obj_discount = Discount(df_discount_indexed.index[-1] + 1, name_discount, percent)
+            obj_discount.create_discount()
         except FileNotFoundError:
             print("you have not this file please create a file with name event.csv and set first "
                   "row with this items (id_event,Name_event,Date_event,Time_event,"
                   "place_event,Cost_event,Total_capacity,Mod_total_capacity,Flag_event)"
                   "and second row with this item (0,) without parenthesis ")
-
-
-
-
-obj_user = Admin()
-a = obj_user.remove_event()
