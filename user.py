@@ -3,8 +3,7 @@ import logging
 import pandas as pd
 from person import Person
 
-LOG_FORMAT = "%(levelname)s  %(filename)s %(message)s"
-logging.basicConfig(filename='mhp.log', level = logging.DEBUG , filemode='w')
+logging.basicConfig(format="%(asctime)s %(levelname)s %(filename)s %(message)s", filename='mhp.log', level = logging.DEBUG , filemode='a', datefmt='%d-%b-%y %H:%M:%S')
 logger = logging.getLogger('LOG')
 
 
@@ -81,7 +80,6 @@ class User(Person):
                     input_user_type = int(input("1 or 2 or 3: "))
                     if input_user_type in [1, 2, 3, 4]:
                         if input_user_type == 1:
-                            print("enter your id student: ")
                             type_account = "Student"
                             percent = 15
                             break
@@ -114,79 +112,84 @@ class User(Person):
             logging.exception('not completely header in file')
 
     def buy_ticket(self, user_choice):
-        many_of_ticket = int(input("how many tickets do you want? "))
-        df_first = pd.read_csv("event.csv")
-        df_first_2 = df_first[
-                         ["id_event", "Name_event", "Date_event", "Time_event", "place_event", "Cost_event",
-                          "Total_capacity", "Mod_total_capacity", "Flag_event"]].loc[1:, :]
-        cost=df_first_2.iloc[user_choice]["Cost_event"]
-        mod_capacity=df_first_2.iloc[user_choice]["Mod_total_capacity"]
-         if mod_capacity>1:
-            # nemayesh gheymat
-            # access  a specific few rows/columns from DataFrame
-            cap=df_first.loc[df_first["id_event"] == user_choice, "Flag_event"]
-            df_first.loc[df_first["id_event"] == user_choice, "Flag_event"] = cap-1
-            # Write object to a (csv) file
-            df_first.to_csv("event.csv", index=False)
-         else:
-             print("this event dont have cpacity ")
+        try :
+            print("how many tickets do you want ?")
+            many_of_ticket = int(input())
 
 
-        # try :
-        #     many_of_ticket = int(input("how many tickets do you want? "))
-        #     df_account = pd.read_csv("event.csv")
-        #     df_account_indexed = df_account.set_index("id_event", drop=True)
-        #     prices = [price for price in df_account]
-        #     logger.info("we give price of events from price column in event file .")
-        #     price_of_event = prices[user_choice][5]
-        #     price_of_event = many_of_ticket * price_of_event
-        #     df_account2 = pd.read_csv("account.csv")
-        #     df_account_indexed = df_account.set_index("id_account", drop=True)
-        #     logger.info("we give percent of jobs from account file .")
-        #     darsaad = [darsad for darsad in df_account2]
-        #     percent_of_job = darsaad[user_choice][4]
-        #     print("your total payment is : ", price_of_event - (1 / percent_of_job) * price_of_event)
-        #     print("Do you have any off code ? (if yes please input it ) ")
-        #     number_try = 3
-        #     while number_try > 0:
-        #         input_user_off_code = input()
-        #         if input_user_off_code == 'no':
-        #             input_user_want_to_buy_or_not = input("Do you want to continue paying ? y/n")
-        #             if input_user_want_to_buy_or_not == 'y':
-        #                 print("-----------------shaparak------------------")
-        #                 mod_of_capacity = prices[user_choice][7]-1
-        #             else:
-        #                 print("back to menu")  # how to call menu method ????????
-        #         df = pd.read_csv("discount.csv")
-        #         df_indexed = df.set_index("name_discount", drop=True)
-        #         list_username = list(df_account_indexed["name_discount"])
-        #         logger.info("we check code from discount file .")
-        #         darsaadd2 = [darsad2 for darsad2 in df]
-        #         percent_of_code = darsaadd2[user_choice][2]
-        #         if input_user_off_code not in list_username[1:]:
-        #             print("your input code is not defined !")
-        #             number_try -= 1
-        #             break
-        #         else:
-        #             print("your total payment is : ", price_of_event - (1 / percent_of_job) * price_of_event - (1 / percent_of_code) * price_of_event)
-        #
-        #     print("Do you want to continue paying ? y/n ")
-        #     input_user_want_to_buy_or_not = input()
-        #     logger.info("if user wants to buy ticket we will call shaparak .")
-        #     if input_user_want_to_buy_or_not == 'y':
-        #         print("-----------------shaparak-------------------")
-        #         mod_of_capacity = prices[user_choice][7] - 1
-        #     else:
-        #         print("back to menu")  # how to call menu method ????????
-        #
-        # except ValueError :
-        #     print("INVALID input.")
-        # except KeyError :
-        #     logger.error("Not found in index .")
+            df_first = pd.read_csv("event.csv")
+            df_first_2 = df_first[
+                             ["id_event", "Name_event", "Date_event", "Time_event", "place_event", "Cost_event",
+                              "Total_capacity", "Mod_total_capacity", "Flag_event"]].loc[1:, :]
+            cost = df_first_2.iloc[user_choice]["Cost_event"]
+            mod_capacity = df_first_2.iloc[user_choice]["Mod_total_capacity"]
+
+
+            df_first_account = pd.read_csv("account.csv")
+            df_first_3 = df_first_account[
+                             ["id_account","username","password","type_account","persent","flag"]].loc[1:, :]
+            job_percent = df_first_3.iloc[user_choice]["percent"]
+
+            df_first_discount = pd.read_csv("discount.csv")
+            df_first_4 = df_first_discount[
+                             ["id_discount","name_discount","darsad"]].loc[1:, :]
+            discount_persent = df_first_4.iloc[user_choice]["darsad"]
+            name_of_discount = df_first_4.iloc[user_choice]["name_discount"]
+
+            if mod_capacity > 1:
+                price_of_event = many_of_ticket * cost
+                logger.info("we give percent of jobs from account file .")
+                print("your total payment is : ", price_of_event - (1 / job_percent) * price_of_event)
+                print("Do you have any off code ? (if yes please input it ) ")
+                number_try = 3
+                while number_try > 0:
+                    input_user_off_code = input()
+                    if input_user_off_code == 'no':
+                        print("Do you want to continue paying ? y/n ")
+                        input_user_want_to_buy_or_not = input()
+                        if input_user_want_to_buy_or_not == 'y':
+                            print("-----------------shaparak------------------")
+                            cap = df_first.loc[df_first["id_event"] == user_choice, "Flag_event"]
+                            df_first.loc[df_first["id_event"] == user_choice, "Flag_event"] = cap - 1
+                            # Write object to a (csv) file
+                            df_first.to_csv("event.csv", index=False)
+                            mod_capacity = df_first_2.iloc[user_choice]["Mod_total_capacity"]
+                        else:
+                            print("back to menu")  # how to call menu method ????????
+
+
+                    logger.info("we check code from discount file .")
+
+                    if input_user_off_code not in name_of_discount:
+                        print("your input code is not defined !")
+                        number_try -= 1
+                        break
+                    else:
+                        print("your total payment is : ", price_of_event - (1 / job_percent) * price_of_event - (1 / discount_persent) * price_of_event)
+
+                print("Do you want to continue paying ? y/n ")
+                input_user_want_to_buy_or_not = input()
+                logger.info("if user wants to buy ticket we will call shaparak .")
+                if input_user_want_to_buy_or_not == 'y':
+                    print("-----------------shaparak-------------------")
+                    mod_capacity = df_first_2.iloc[user_choice]["Mod_total_capacity"]
+                else:
+                    print("back to menu")  # how to call menu method ????????
+            else:
+                print("this event dont have cpacity ")
+        except ValueError :
+            print("INVALID input.")
+        except KeyError :
+            logger.error("Not found in index .")
+
     @classmethod
     def menu_user(self):
         print("1-show events \n2-choose event \n3-create account \n4-log in \n")
 
-obj=User(2,"A")
+obj=User('a','s')
 # print(obj.show_details_event(1))
 obj.buy_ticket(2)
+# obj.show_event()
+# obj.create_account()
+# obj.show_details_event(3)
+# obj.log_in()
