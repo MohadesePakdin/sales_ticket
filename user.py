@@ -32,13 +32,18 @@ class User(Person):
         except Exception:
             logging.exception('this is file error')
 
-    def show_detail(self, user_input):  # in show_event methods we can not see some of details
+    def show_details_event(self, index_event):  # in show_event methods we can not see some of details
         try:
-            with open("event.csv", mode='r') as csv_file:
-                csv_reader = csv.reader(csv_file, delimiter=',')
-                movies = [movie for movie in csv_reader]
-                print(f"movie name :", (movies[user_input][1]), ", date_event:", (movies[user_input][2]), ", zarfiat:",
-                      (movies[user_input][3]))
+            pd.set_option('display.max_columns', None)
+            df_first = pd.read_csv("event.csv")
+            df_first_2 = df_first[
+                             [ "Name_event", "Date_event", "Time_event", "place_event", "Cost_event",
+                              "Mod_total_capacity",]].loc[1:, :]
+            df_first_3 = df_first_2.loc[[index_event]]
+            df_first_3["Cost_event"] = df_first_3["Cost_event"].astype(int)
+            df_first_3["Mod_total_capacity"] = df_first_3["Mod_total_capacity"].astype(int)
+            df_first_3["Total_capacity"] = df_first_3["Total_capacity"].astype(int)
+            print(df_first_3.loc[[index_event]])
 
         except Exception:
             logging.exception('this is file error')
@@ -156,3 +161,5 @@ class User(Person):
     @classmethod
     def menu_user(self):
         print("1-show events \n2-choose event \n3-create account \n4-log in \n")
+obj=User(2,"A")
+print(obj.show_details_event(2))
