@@ -75,26 +75,29 @@ class Admin(Person):
 
 
     def remove_event(self, df_first=None):
+        #Which event do you want to delete
         id_remove=int(input("please enter row for delete: "))
 
         while True:
             try:
-
+                #read csv file
                 df_first = pd.read_csv("event.csv")
+                #access  a specific few rows/columns from DataFrame
                 df_first.loc[df_first["id_event"]==id_remove,"Flag_event"]=0
+                #Write object to a (csv) file
                 df_first.to_csv("event.csv", index=False)
 
             except EOFError:
+                # raised when a built-in function  do not read any data before encountering
                 print("File is empty. You must add a film first before you can remove it.")
 
             except KeyError:
+                #raised when you try to access a key that dose not exist
                 print("That event doesn't exist.")
 
             df = pd.read_csv(r"event.csv")
             print(df)
-
-
-
+            #Do you want to continue deleting or not
             keepLooping = input("\nAnother evet to delete? y/n: ")
             if keepLooping == "n":
                 break
@@ -102,8 +105,7 @@ class Admin(Person):
 
 
     def add_discount(self):
-        # we have a csv file at first and csv file have 2 static record that dont delete this first row is my attribute
-        # and second row is set first id and add them in future record
+        # we have a csv file at first and csv file have 2 static record
         # load csv file
         file_name = "discount.csv"
         # exception handling
@@ -111,7 +113,7 @@ class Admin(Person):
             df_discount = pd.read_csv(file_name)
             # set id_event for index in csv file
             df_discount_indexed = df_discount.set_index("id_discount", drop=True)
-            # get info of one event from admin and add to csv file
+            # get info of discount
             name_discount = input("Enter name of discount: ")
             # this while is for that we input correct answer to dataset
 
@@ -128,16 +130,22 @@ class Admin(Person):
 
 
     def active_evevnt(self):
+        #Show current events
+        #open csv file
         with open("event.csv", "r") as csv_file:
             csv_reader = csv.DictReader(csv_file, delimiter=',')
+            #In this loop we want to display events whose flag is 1
             for lines in csv_reader:
                 print(lines['id_event'], lines['Name_event'],lines['Date_event'],lines['Time_event'],
                       lines['place_event'],lines['Cost_event'],lines['Total_capacity'],lines['Mod_total_capacity'],
                       lines['Flag_event']==1)
 
     def deactive_event(self):
+        #
+        # open csv file
         with open("event.csv", "r") as csv_file:
             csv_reader = csv.DictReader(csv_file, delimiter=',')
+            # In this loop we want to display events whose flag is 1
             for lines in csv_reader:
                 print(lines['id_event'], lines['Name_event'], lines['Date_event'], lines['Time_event'],
                       lines['place_event'], lines['Cost_event'], lines['Total_capacity'], lines['Mod_total_capacity'],
