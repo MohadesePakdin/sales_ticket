@@ -155,7 +155,7 @@ class User(Person):
         a = prices[user_choice][5]
         df_account2 = pd.read_csv("account.csv")
         df_account_indexed = df_account.set_index("id_account", drop=True)
-        darsaad = [darsad for darsad in df_account]
+        darsaad = [darsad for darsad in df_account2]
         b = darsaad[user_choice][4]
         print("your total payment is : ", a - 1 / b * a)
         print("Do you have any off code ? (if yes please input it )")
@@ -167,12 +167,13 @@ class User(Person):
                 input_user_want_to_buy_or_not = input()
                 if input_user_want_to_buy_or_not == 'y':
                     print("-----------------shaparak------------------")
+                    d = prices[user_choice][7]-1
                 else:
                     print("back to menu")  # how to call menu method ????????
             df = pd.read_csv("discount.csv")
             df_indexed = df.set_index("name_discount", drop=True)
             list_username = list(df_account_indexed["name_discount"])
-            darsaadd2 = [darsad2 for darsad2 in df_account]
+            darsaadd2 = [darsad2 for darsad2 in df]
             c = darsaadd2[user_choice][2]
             if input_user_off_code not in list_username[1:]:
                 print("your input code is not defined !")
@@ -184,7 +185,8 @@ class User(Person):
         print("Do you want to continue paying ? y/n ")
         input_user_want_to_buy_or_not = input()
         if input_user_want_to_buy_or_not == 'y':
-            print("-----------------shaparak------------------")
+            print("-----------------shaparak-------------------")
+            d = prices[user_choice][7] - 1
         else:
             print("back to menu")  # how to call menu method ????????
 
