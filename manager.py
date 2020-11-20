@@ -142,6 +142,8 @@ class Admin(Person):
             darsad = input("Enter darsad of discount: ")
 
             obj_discount = Discount(df_discount_indexed.index[-1] + 1, name_discount, darsad)
+            obj_discount.create_discount()
+            print(obj_discount.__str__())
         # if file not fount
         except FileNotFoundError:
             print("you have not this file please create a file with name event.csv and set first "
@@ -150,11 +152,6 @@ class Admin(Person):
                   "and second row with this item (0,) without parenthesis ")
             logger.error("file not fount")
 
-    def active_event(self):
-        df = pd.read_csv("event.csv")
-        df_active_event = df.loc[df['Flag_event'] == 1]
-        pd.set_option('display.max_columns', None)
-        return df_active_event
 
     def deactive_event(self):
         df = pd.read_csv("event.csv")
