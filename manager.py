@@ -27,6 +27,9 @@ class Admin(Person):
 
 
     def signup(self):
+
+
+
         pass
 
     def add_event(self):
@@ -124,6 +127,21 @@ class Admin(Person):
                   "and second row with this item (0,) without parenthesis ")
 
 
+    def active_evevnt(self):
+        with open("event.csv", "r") as csv_file:
+            csv_reader = csv.DictReader(csv_file, delimiter=',')
+            for lines in csv_reader:
+                print(lines['id_event'], lines['Name_event'],lines['Date_event'],lines['Time_event'],
+                      lines['place_event'],lines['Cost_event'],lines['Total_capacity'],lines['Mod_total_capacity'],
+                      lines['Flag_event']==1)
+
+    def deactive_event(self):
+        with open("event.csv", "r") as csv_file:
+            csv_reader = csv.DictReader(csv_file, delimiter=',')
+            for lines in csv_reader:
+                print(lines['id_event'], lines['Name_event'], lines['Date_event'], lines['Time_event'],
+                      lines['place_event'], lines['Cost_event'], lines['Total_capacity'], lines['Mod_total_capacity'],
+                      lines['Flag_event'] == 0)
 
 
 obj_user = Admin()
