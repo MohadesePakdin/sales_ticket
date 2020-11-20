@@ -12,17 +12,27 @@ class Person:
         self.flag = flag
 
     def log_in(self):
+        if self.status == 'admin' :
+            file_path = "admin.csv"
+            id = "id_admin"
+        else :
+            file_path = "account.csv"
+            id = "id_account"
         number_try = 3
         while number_try > 0:
             print("input your username and password")
             username = input("please enter your username: ")
             password = input("please enter your password: ")
-            df= pd.read_csv("account.csv")#admin.csv
-            df_indexed = df.set_index("id_account", drop=True)#id_admin
+            df = pd.read_csv(file_path)
+            df_indexed = df.set_index(id, drop=True)
             try:
-                if df_indexed.iloc[df_indexed.index[df_indexed['username'] == username].tolist()[0], 1] == int(password):
+                if df_indexed.iloc[df_indexed.index[df_indexed['username'] == username].tolist()[0], 1] == int(
+                        password):
+                    ###################  ta jayee ke bekhad username ro migire mage eenke password dorost bezanim .
+
                     print("correct")
                     break
+
                 else:
                     print("your username or password is wrong please try again")
             except IndexError:
@@ -32,15 +42,18 @@ class Person:
                 else:
                     print("your username or password is wrong")
                     number_try -= 1
+
+            except ValueError:
+                print("your username or password is WRONG .")
         else:
             input("\n\nyou try upper than 3 times your account block print any key to exit: ")
             sys.exit()
 
     def crate_account(self):
-        file_path = "account.csv"# admin.csv
+        file_path = "account.csv"  # admin.csv
         try:
-            df= pd.read_csv(file_path)
-            df_indexed = df.set_index("id_account", drop=True)# id_admin
+            df = pd.read_csv(file_path)
+            df_indexed = df.set_index("id_account", drop=True)  # id_admin
             # df_account = pd.read_csv("account.csv")
             # df_account_indexed = df_account.set_index("id_account", drop=True)
             list_username = list(df_indexed["username"])
@@ -59,7 +72,7 @@ class Person:
             while True:
                 input_user_type = input("1 or 2 or 3: ")
                 try:
-                    input_user_type_int=int(input_user_type)
+                    input_user_type_int = int(input_user_type)
                     if input_user_type_int in [1, 2, 3, 4]:
                         if input_user_type_int == 1:
                             type_account = "Student"
@@ -89,8 +102,6 @@ class Person:
                   "(id_account,username,password,flag)and second row with this item (0,) without parenthesis")
             # logging.exception('not completely header in file')
 
-
-
     def show_event(self):
         df_first = pd.read_csv("event.csv")
         df_first_2 = df_first[["Name_event", "Date_event", "Time_event", "place_event", "Cost_event", "Total_capacity",
@@ -102,5 +113,10 @@ class Person:
         sys.exit()
 
     def show_details_event(self):
+        #admin : zarfiate baghi mande
+        #user : detail of event
         pass
 
+
+# obj_person = Person('d')
+# obj_person.log_in()
