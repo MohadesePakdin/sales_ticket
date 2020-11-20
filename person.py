@@ -12,8 +12,8 @@ class Person:
 
     def log_in(self):
         if self.status == 'admin':
-            file_path = "admin.csv"
-            id_person = "id_admin"
+            file_path = "manager.csv"
+            id_person = "id_manager"
         else:
             file_path = "account.csv"
             id_person = "id_account"
@@ -22,29 +22,35 @@ class Person:
             print("input your username and password")
             username = input("please enter your username: ")
             password = input("please enter your password: ")
-            df = pd.read_csv(file_path)
-            df_indexed = df.set_index(id_person, drop=True)
             try:
-                if df_indexed.iloc[df_indexed.index[df_indexed['username'] == username].tolist()[0], 1] == int(
-                        password):
-                    print("correct")
-                    break
+                df = pd.read_csv(file_path)
+                df_indexed = df.set_index(id_person, drop=True)
+                try:
+                    if df_indexed.iloc[df_indexed.index[df_indexed['username'] == username].tolist()[0], 1] == int(
+                            password):
+                        print("you log in successfully now you can choice menu!")
+                        break
 
-                else:
-                    print("your username or password is wrong please try again")
-            except IndexError:
-                if number_try > 1:
-                    print("your username or password is wrong please try again")
-                    number_try -= 1
-                else:
-                    print("your username or password is wrong")
-                    number_try -= 1
+                    else:
+                        print("your username or password is wrong please try again")
+                except IndexError:
+                    if number_try > 1:
+                        print("your username or password is wrong please try again")
+                        number_try -= 1
+                    else:
+                        print("your username or password is wrong")
+                        number_try -= 1
 
-            except ValueError:
-                print("your username or password is WRONG .")
-        else:
-            input("\n\nyou try upper than 3 times your account block print any key to exit: ")
-            sys.exit()
+                except ValueError:
+                    print("your username or password is WRONG .")
+                else:
+                    input("\n\nyou try upper than 3 times your account block print any key to exit: ")
+                    sys.exit()
+            except FileNotFoundError:
+                print("you dont have this file you can make this by steps 1- create "
+                      "a file by name manager.csv and in this row"
+                      "row one:id_manager,username,password,flag"
+                      "row two:0,")
 
     def show_event(self):
         df_first = pd.read_csv("event.csv")
@@ -53,8 +59,10 @@ class Person:
                           "Total_capacity", "Mod_total_capacity", "Flag_event"]].loc[1:, :]
         df_first_2["Cost_event"] = df_first_2["Cost_event"].astype(int)
         df_first_2["Mod_total_capacity"] = df_first_2["Mod_total_capacity"].astype(int)
+        df_first_2["Flag_event"] = df_first_2["Flag_event"].astype(int)
+        df_first_2["Total_capacity"] = df_first_2["Total_capacity"].astype(int)
         pd.set_option('display.max_columns', None)
-        print(df_first_2)
+        return df_first_2
 
     @staticmethod
     def exit():
