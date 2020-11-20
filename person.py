@@ -75,10 +75,16 @@ class Person:
         df_first_2 = df_first[
                          ["id_event", "Name_event", "Date_event", "Time_event", "place_event", "Cost_event",
                           "Total_capacity", "Mod_total_capacity", "Flag_event"]].loc[1:, :]
-        df_first_3=df_first_2.loc[[index_event]]
+        df_first_3 = df_first_2.loc[[index_event]]
         df_first_3["Cost_event"] = df_first_3["Cost_event"].astype(int)
         df_first_3["Mod_total_capacity"] = df_first_3["Mod_total_capacity"].astype(int)
         df_first_3["Total_capacity"] = df_first_3["Total_capacity"].astype(int)
         df_first_3["Flag_event"] = df_first_3["Flag_event"].astype(int)
         print(df_first_3.loc[[index_event]])
 
+    @staticmethod
+    def active_event():
+        df = pd.read_csv("event.csv")
+        df_active_event = df.loc[df['Flag_event'] == 1]
+        pd.set_option('display.max_columns', None)
+        return df_active_event
