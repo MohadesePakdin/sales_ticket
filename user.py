@@ -101,7 +101,7 @@ class User(Person):
             while True:
                 # USER HAS TO INPUT ONE OF THEM
                 try:
-                    input_user_type = int(input("1 or 2 or 3: "))
+                    input_user_type = int(input("1 or 2 or 3 or 4: "))
                     if input_user_type in [1, 2, 3, 4]:
                         if input_user_type == 1:
                             type_account = "Student"
