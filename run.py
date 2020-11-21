@@ -4,6 +4,9 @@ import logging
 # this is an interface
 from manager import Admin
 from user import User
+import logging
+# #creat and configure logger
+logger = logging.getLogger()
 
 print("-----------------------------------------------------------------------------------")
 print("---------------------------welcome to sales ticket app-----------------------------")
@@ -23,6 +26,7 @@ while True:
                 while True:
                     # this line check admin have an account or no
                     print("do you have an account:\n1-yes\n2-no")
+
                     try:
                         # admin select one of this choice (has account or no)
                         selected_admin = int(input("enter your choice: "))
@@ -62,6 +66,7 @@ while True:
                                             print("your input is not valid please select other choice")
                                     except ValueError:
                                         print("your input is not valid please select other choice")
+                                        logger.error("ValueError: invalid input ")
                                         # if admin dont have an account should input a security code
                             elif selected_admin == 2:
                                 security_code = input("please enter security code for create account: ")
@@ -98,16 +103,21 @@ while True:
                                                 print("your input is not valid please select other choice")
                                         except ValueError:
                                             print("your input is not valid please select other choice")
+                                            logger.error("ValueError:invalid input")
                                 else:
                                     print("security code is wrong!")
                                     # log warning
+                                    logger.warning("security code is wrong!")
+
                                     sys.exit()
                             else:
                                 print("your input is not valid please select other choice")
                                 # log warning
+                                logger.warning("")
                     except ValueError:
                         print("your input is not valid please select other choice")
-                        # log warning
+                        # log error
+                        logger.error("ValueError: invalid input")
 
             elif user_input_selected == 2:
                 # if customer select create an object of this
@@ -143,6 +153,7 @@ while True:
                                             print("your input is not valid please select other choice")
                                 except ValueError:
                                     print("your input is not valid please select other choice")
+                                    logger.error("ValueError: invalid input")
                             elif selected_user == 2:
                                 print("thank you for see events\nbye")
                                 input("enter any key to exit..... ")
@@ -150,9 +161,11 @@ while True:
                             else:
                                 print("your input is not valid please select other choice")
                                 # log warning
+                                logger.warning("")
                     except ValueError:
                         print("your input is not valid please select other choice")
-                        # log warning
+                        # log error
+                        logger.error("ValueError:invalid input")
             elif user_input_selected == 3:
                 print("thank you for see events\nbye")
                 input("enter any key to exit..... ")
@@ -162,3 +175,4 @@ while True:
             print("your input is not valid please select other choice")
     except ValueError:
         print("your input is not valid please select other choice")
+        logger.error("ValueError:invalid input")
