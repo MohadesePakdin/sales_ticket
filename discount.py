@@ -2,6 +2,7 @@
 import csv
 
 
+
 class Discount:
     """
     this class used for create a discount that admin create this
