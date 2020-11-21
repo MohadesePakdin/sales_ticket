@@ -131,12 +131,12 @@ while True:
                                             obj_customer.buy_ticket(input_user)
                                             break
                                         elif selected_user2 == 2:
-                                            print("create account")
-                                            print("login")
-                                            print("show_event")
-                                            print("choose event")
-                                            print("show detailed")
-                                            print("buy thicket")
+                                            obj_customer.create_account()
+                                            obj_customer.log_in()
+                                            print(obj_customer.active_event())
+                                            obj_customer.show_details_event(input_user)
+                                            obj_customer.choose_event(input_user)
+                                            obj_customer.buy_ticket(input_user)
                                             break
                                         else:
                                             print("your input is not valid please select other choice")
