@@ -134,7 +134,7 @@ while True:
                                     if selected_user2 in range(1, 3):
                                         if selected_user2 == 1:
                                             obj_customer.log_in()
-                                            print(obj_customer.active_event())
+                                            obj_customer.show_event()
                                             input_user = int(input("your selection : "))
                                             obj_customer.show_details_event(input_user)
                                             obj_customer.choose_event(input_user)
@@ -143,7 +143,7 @@ while True:
                                         elif selected_user2 == 2:
                                             obj_customer.create_account()
                                             obj_customer.log_in()
-                                            print(obj_customer.active_event())
+                                            obj_customer.show_event()
                                             input_user = int(input("your selection : "))
                                             obj_customer.show_details_event(input_user)
                                             obj_customer.choose_event(input_user)
