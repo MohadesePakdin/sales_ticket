@@ -142,7 +142,7 @@ class User(Person):
         param user_choice: user select a event and buy it
         return: if sale is successully return True else return False
         """
-        user_choice-=1
+        user_choice -= 1
         try:
             many_of_ticket = int(input("how many tickets do you want ? "))
             df_event = pd.read_csv("event.csv")
@@ -166,10 +166,13 @@ class User(Person):
                 price_of_event = many_of_ticket * cost
                 logger.info("we give percent of jobs from account file .")
                 a = price_of_event - (job_percent / 100) * price_of_event
-                print("your total payment is : ",a )
+                print("your total payment is : ", a)
                 input_user_off_code = input("Do you have any off code ? (if yes please input it): ")
                 list_off = df_first_discount['name_discount'].to_list()
-                if input_user_off_code == "":
+                if discount_persent + job_percent >= 100:
+                    print("this event free")
+                    print("paid")
+                elif input_user_off_code == "":
                     print("your total cost is", price_of_event - (job_percent / 100) * price_of_event)
                     print("----------------------shaparak--------------------------")
                     print("paid")
@@ -179,14 +182,14 @@ class User(Person):
                     if total_cost <= 0:
                         print("this event free")
                         print("paid")
-                        cap = df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"]- many_of_ticket
+                        cap = df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"] - many_of_ticket
                         df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"] = cap
                         df_event.to_csv("event.csv", index=False)
                     else:
                         print("your total cost is", total_cost)
                         print("----------------------shaparak--------------------------")
                         print("paid")
-                    cap = df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"]- many_of_ticket
+                    cap = df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"] - many_of_ticket
                     df_event.loc[df_event["id_event"] == user_choice, "MMod_total_capacity"] = cap
                     df_event.to_csv("event.csv", index=False)
                 else:
@@ -196,7 +199,7 @@ class User(Person):
                     if total_cost <= 0:
                         print("this event free")
                         print("paid")
-                        cap = df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"]- many_of_ticket
+                        cap = df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"] - many_of_ticket
                         df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"] = cap
                         df_event.to_csv("event.csv", index=False)
                     else:
@@ -224,5 +227,3 @@ class User(Person):
         return: str
         """
         print("1-show events \n2-choose event \n3-create account \n4-log in \n")
-
-
