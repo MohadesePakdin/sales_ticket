@@ -173,17 +173,6 @@ class Admin(Person):
                   "and second row with this item (0,) without parenthesis ")
             logger.error("FileNotFoundError: No file found Create it first")
 
-    def active_event(self):
-        """
-        Show active events to admin.
-
-        :return:Data frame
-        """
-        df = pd.read_csv("event.csv")
-        df_active_event = df.loc[df['Flag_event'] == 1]
-        pd.set_option('display.max_columns', None)
-        return df_active_event
-
     def deactive_event(self):
         """
         Show active events to admin.
