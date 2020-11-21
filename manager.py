@@ -5,7 +5,7 @@ import csv
 from datetime import datetime
 
 # this library is read a csv file in dataframe format
-import pandas as pd
+
 # use this library for colored code
 
 from termcolor import colored
@@ -16,9 +16,9 @@ import pandas as pd
 from termcolor import colored
 
 from person import Person
-import logging
+import logging,colorlog
 
-from colorlog.colorlog import ColoredFormatter
+
 
 
 # #creat and configure logger
@@ -115,8 +115,6 @@ class Admin(Person):
 
     def remove_event(self):
         """This method is for the admin to delete the event.
-
-
         :return:Data frame
         """
         # Which event do you want to delete
