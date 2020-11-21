@@ -1,9 +1,11 @@
 # this library is for systemic work
 import sys
-import logging
 # this is an interface
 from manager import Admin
 from user import User
+import logging
+# #creat and configure logger
+logger = logging.getLogger()
 
 print("-----------------------------------------------------------------------------------")
 print("---------------------------welcome to sales ticket app-----------------------------")
@@ -23,6 +25,7 @@ while True:
                 while True:
                     # this line check admin have an account or no
                     print("do you have an account:\n1-yes\n2-no")
+
                     try:
                         # admin select one of this choice (has account or no)
                         selected_admin = int(input("enter your choice: "))
@@ -43,7 +46,7 @@ while True:
                                           "7-Exit ")
                                     try:
                                         admin_input_selected = int(input("select an item: "))
-                                        if admin_input_selected in range(1, 7):
+                                        if admin_input_selected in range(1, 8):
                                             if admin_input_selected == 1:
                                                 print(obj_admin.active_event())
                                             elif admin_input_selected == 2:
@@ -62,6 +65,7 @@ while True:
                                             print("your input is not valid please select other choice")
                                     except ValueError:
                                         print("your input is not valid please select other choice")
+                                        logger.error("ValueError: invalid input (your choice should be integer) ")
                                         # if admin dont have an account should input a security code
                             elif selected_admin == 2:
                                 security_code = input("please enter security code for create account: ")
@@ -98,23 +102,28 @@ while True:
                                                 print("your input is not valid please select other choice")
                                         except ValueError:
                                             print("your input is not valid please select other choice")
+                                            logger.error("ValueError:invalid input (maybe you wrote string character)")
                                 else:
                                     print("security code is wrong!")
                                     # log warning
+                                    logger.warning("security code is wrong!")
+
                                     sys.exit()
                             else:
                                 print("your input is not valid please select other choice")
                                 # log warning
+                                logger.warning("your choices should be between 1 to 3")
                     except ValueError:
                         print("your input is not valid please select other choice")
-                        # log warning
+                        # log error
+                        logger.error("ValueError: invalid input")
 
             elif user_input_selected == 2:
                 # if customer select create an object of this
                 obj_customer = User("user")
                 while True:
-                    print(obj_customer.active_event())
-                    print("do you want sale a event:\n1-yes\n2-no")
+                    print(obj_customer.show_event())
+                    print("do you want sale an event:\n1-yes\n2-no")
                     try:
                         selected_user = int(input("enter your choice: "))
                         if selected_user in range(1, 3):
@@ -135,6 +144,7 @@ while True:
                                             obj_customer.create_account()
                                             obj_customer.log_in()
                                             print(obj_customer.active_event())
+                                            input_user = int(input("your selection : "))
                                             obj_customer.show_details_event(input_user)
                                             obj_customer.choose_event(input_user)
                                             obj_customer.buy_ticket(input_user)
@@ -143,6 +153,7 @@ while True:
                                             print("your input is not valid please select other choice")
                                 except ValueError:
                                     print("your input is not valid please select other choice")
+                                    logger.error("ValueError: invalid input")
                             elif selected_user == 2:
                                 print("thank you for see events\nbye")
                                 input("enter any key to exit..... ")
@@ -150,9 +161,11 @@ while True:
                             else:
                                 print("your input is not valid please select other choice")
                                 # log warning
+                                logger.warning("")
                     except ValueError:
                         print("your input is not valid please select other choice")
-                        # log warning
+                        # log error
+                        logger.error("ValueError:invalid input")
             elif user_input_selected == 3:
                 print("thank you for see events\nbye")
                 input("enter any key to exit..... ")
@@ -162,3 +175,4 @@ while True:
             print("your input is not valid please select other choice")
     except ValueError:
         print("your input is not valid please select other choice")
+        logger.error("ValueError:invalid input")

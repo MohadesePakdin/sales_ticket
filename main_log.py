@@ -1,4 +1,4 @@
-import logging
+import colorlog,logging
 
 from colorlog import LevelFormatter, TTYColoredFormatter, ColoredFormatter
 
@@ -27,10 +27,10 @@ default_log_colors = {
 }
 
 # The default format to use for each style
-default_formats = {
-    '%': '%(log_color)s%(levelname)s:%(name)s:%(message)s',
-    '{': '{log_color}{levelname}:{name}:{message}',
-    '$': '${log_color}${levelname}:${name}:${message}'
-}
+# default_formats = {
+#     '%': '%(log_color)s%(levelname)s:%(name)s:%(message)s',
+#     '{': '{log_color}{levelname}:{name}:{message}',
+#     '$': '${log_color}${levelname}:${name}:${message}'
+# }
 
 

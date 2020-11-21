@@ -1,6 +1,6 @@
 id_event,Name_event,Date_event,Time_event,place_event,Cost_event,Total_capacity,Mod_total_capacity,Flag_event,MMod_total_capacity
 0,,,,,,,,,
-1,jashn,1399-08-25,15:00:00,shiraz,1000.0,50.0,46.0,1.0,
+1,jashn,1399-08-25,15:00:00,shiraz,1000.0,50.0,50.0,1.0,
 2,jashn,1399-08-26,15:00:00,shiraz,1000.0,50.0,50.0,0.0,
 3,jashn,1399-08-26,15:00:00,shiraz,1000.0,50.0,50.0,1.0,
 4,jashn,1399-08-25,15:00:00,tehran,7000.0,7.0,7.0,0.0,
