@@ -5,7 +5,7 @@ import csv
 from datetime import datetime
 
 # this library is read a csv file in dataframe format
-import pandas as pd
+
 # use this library for colored code
 
 from termcolor import colored

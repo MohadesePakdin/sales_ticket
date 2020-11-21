@@ -144,7 +144,7 @@ class User(Person):
         """
         user_choice-=1
         try:
-            many_of_ticket = int(input("how many tickets do you want ?"))
+            many_of_ticket = int(input("how many tickets do you want ? "))
             df_event = pd.read_csv("event.csv")
             df_event_2 = df_event[
                              ["id_event", "Name_event", "Date_event", "Time_event", "place_event", "Cost_event",
@@ -165,7 +165,8 @@ class User(Person):
             if mod_capacity > many_of_ticket:
                 price_of_event = many_of_ticket * cost
                 logger.info("we give percent of jobs from account file .")
-                print("your total payment is : ", price_of_event - (job_percent / 100) * price_of_event)
+                a = price_of_event - (job_percent / 100) * price_of_event
+                print("your total payment is : ",a )
                 input_user_off_code = input("Do you have any off code ? (if yes please input it): ")
                 list_off = df_first_discount['name_discount'].to_list()
                 if input_user_off_code == "":
@@ -173,8 +174,7 @@ class User(Person):
                     print("----------------------shaparak--------------------------")
                     print("paid")
                 elif input_user_off_code in list_off:
-                    total_cost = price_of_event - ((job_percent / 100) * price_of_event + (
-                            discount_persent / 100) * price_of_event)
+                    total_cost = a - (discount_persent / 100) * a
 
                     if total_cost <= 0:
                         print("this event free")
@@ -226,5 +226,3 @@ class User(Person):
         print("1-show events \n2-choose event \n3-create account \n4-log in \n")
 
 
-obj = User("a")
-obj.buy_ticket(8)
