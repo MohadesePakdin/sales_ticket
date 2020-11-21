@@ -1,4 +1,4 @@
-id_account,username,password,type_account,persent,flag
+id_account,username,password,type_account,percent,flag
 0,
 1,mohadse,4433,student,15,1
 2,saeed,4455,employee,10,1
