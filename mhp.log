@@ -241,3 +241,20 @@ KeyError: 'Total_capacity'
 21-Nov-20 09:05:49 INFO user.py we give percent of jobs from account file .
 21-Nov-20 09:10:06 INFO user.py we give percent of jobs from account file .
 21-Nov-20 09:13:04 INFO user.py we give percent of jobs from account file .
+21-Nov-20 12:58:19 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:04:22 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:04:49 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:08:50 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:13:23 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:13:26 INFO utils.py NumExpr defaulting to 4 threads.
+21-Nov-20 13:13:49 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:13:53 INFO utils.py NumExpr defaulting to 4 threads.
+21-Nov-20 13:21:19 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:21:24 INFO utils.py NumExpr defaulting to 4 threads.
+21-Nov-20 13:25:41 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:26:38 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:31:49 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:33:09 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:33:13 ERROR user.py Not found in index .
+21-Nov-20 13:33:28 INFO user.py we give percent of jobs from account file .
+21-Nov-20 13:33:31 INFO utils.py NumExpr defaulting to 4 threads.
