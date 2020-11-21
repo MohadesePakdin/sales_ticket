@@ -110,6 +110,7 @@ while True:
                         # log warning
 
             elif user_input_selected == 2:
+                # if customer select create an object of this
                 obj_customer = User("user")
                 while True:
                     print(obj_customer.active_event())
