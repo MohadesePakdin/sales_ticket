@@ -1,40 +1,58 @@
+# this library is for systemic work
 import sys
-from user import User
-import pandas as pd
+import logging
+# this is an interface
+from manager import Admin
 
 print("-----------------------------------------------------------------------------------")
 print("---------------------------welcome to sales ticket app-----------------------------")
 print("---------------------create by parisa , reyhane , mohaddese------------------------")
 while True:
+    # user has 3 choice she/he can select one of them
     print("please select one of follow choices:")
     print("1-admin \n2-customer\n3-exit ")
     try:
+        # user input one of them
         user_input_selected = int(input("enter your choice: "))
+        # this if check that input was in range
         if user_input_selected in range(1, 4):
+            # if this if True mean user is admin
             if user_input_selected == 1:
+                obj_admin = Admin("admin")
                 while True:
+                    # this line check admin have an account or no
                     print("do you have an account:\n1-yes\n2-no")
                     try:
+                        # admin select one of this choice (has account or no)
                         selected_admin = int(input("enter your choice: "))
                         if selected_admin in range(1, 3):
                             if selected_admin == 1:
-                                print("login")
+                                # create an object from admin class
+                                # invoke login method
+                                obj_admin.log_in()
                                 while True:
-                                    print("choose menu")
+                                    print("please select one of follow choices:\n")
+                                    print("1-show all active event \n"
+                                          "2-show all event \n"
+                                          "3-show all deactivate event\n"
+                                          "4-create event \n"
+                                          "5-remove event \n"
+                                          "6-Exit ")
                                     try:
                                         admin_input_selected = int(input("output of choose menu "))
-                                        if admin_input_selected in range(1, 6):
+                                        if admin_input_selected in range(1, 7):
                                             if admin_input_selected == 1:
-                                                print("show_all_active_event()")
+                                                print(obj_admin.active_event())
                                             elif admin_input_selected == 2:
-                                                print("show_all_event()")
+                                                print(obj_admin.show_event())
                                             elif admin_input_selected == 3:
-                                                print("show_all_deactivate_event()")
+                                                print(obj_admin.deactive_event())
                                             elif admin_input_selected == 4:
-                                                print("create_event()")
+                                                obj_admin.add_event()
                                             elif admin_input_selected == 5:
-                                                print("exit()")
-                                                sys.exit()
+                                                obj_admin.remove_event()
+                                            elif admin_input_selected == 6:
+                                                obj_admin.exit()
                                         else:
                                             print("your input is not valid please select other choice")
                                     except ValueError:
@@ -42,24 +60,31 @@ while True:
                             elif selected_admin == 2:
                                 security_code = input("please enter security code for create account: ")
                                 if security_code == "a123a123":
-                                    print("create account")
-                                    print("login")
+                                    obj_admin.register()
+                                    obj_admin.log_in()
                                     while True:
-                                        print("choose menu")
+                                        print("please select one of follow choices:\n")
+                                        print("1-show all active event \n"
+                                              "2-show all event \n"
+                                              "3-show all deactivate event\n"
+                                              "4-create event \n"
+                                              "5-remove event \n"
+                                              "6-Exit ")
                                         try:
                                             admin_input_selected = int(input("output of choose menu "))
-                                            if admin_input_selected in range(1, 6):
+                                            if admin_input_selected in range(1, 7):
                                                 if admin_input_selected == 1:
-                                                    print("show_all_active_event()")
+                                                    print(obj_admin.active_event())
                                                 elif admin_input_selected == 2:
-                                                    print("show_all_event()")
+                                                    print(obj_admin.show_event())
                                                 elif admin_input_selected == 3:
-                                                    print("show_all_deactivate_event()")
+                                                    print(obj_admin.deactive_event())
                                                 elif admin_input_selected == 4:
-                                                    print("create_event()")
+                                                    obj_admin.add_event()
                                                 elif admin_input_selected == 5:
-                                                    print("exit()")
-                                                    sys.exit()
+                                                    obj_admin.remove_event()
+                                                elif admin_input_selected == 6:
+                                                    obj_admin.exit()
                                             else:
                                                 print("your input is not valid please select other choice")
                                         except ValueError:
@@ -76,7 +101,6 @@ while True:
                         # log warning
 
             elif user_input_selected == 2:
-                user_object = User('u','l')
                 while True:
                     print("show event")  # invoke a method from user class
                     print("do you want sale a event:\n1-yes\n2-no")

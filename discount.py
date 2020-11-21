@@ -1,6 +1,7 @@
 import csv
 
 
+
 class Discount:
     def __init__(self, id_discount, name_discount, percent):
         self.id_discount = id_discount
