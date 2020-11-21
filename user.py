@@ -230,5 +230,5 @@ class User(Person):
         print("1-show events \n2-choose event \n3-create account \n4-log in \n")
 
 
-obj = User("a")
-obj.buy_ticket(2)
+# obj = User("a")
+# obj.buy_ticket(2)
