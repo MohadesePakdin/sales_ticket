@@ -1,6 +1,10 @@
+# this library is for read and write csv file
 import csv
+# this library is for submit logging
 import logging
+# this library is for read dataframe file
 import pandas as pd
+# this is parent of user
 from person import Person
 
 logging.basicConfig(format="%(asctime)s %(levelname)s %(filename)s %(message)s", filename='mhp.log',
@@ -9,10 +13,23 @@ logger = logging.getLogger('LOG')
 
 
 class User(Person):
-    def __init__(self, status):
+    def __init__(self, status, username=None, password=None):
+        """
+        this class is for create a user
+        status: status of user
+        username: username
+        password: password
+        """
         super().__init__(status)
+        self.username = username
+        self.password = password
+        self.status = status
 
     def show_event(self):
+        """
+        this method show all of event for user
+        return: a dataframe
+        """
 
         try:
 
@@ -29,7 +46,12 @@ class User(Person):
         except Exception:
             logging.exception('this is file error')
 
-    def show_details_event(self, index_event):  # in show_event methods we can not see some of details
+    def show_details_event(self, index_event):
+        """
+        this method show details of event for user
+        param index_event: index of selection event
+        return: a dataframe
+        """
         try:
             pd.set_option('display.max_columns', None)
             df_first = pd.read_csv("event.csv")
@@ -48,21 +70,19 @@ class User(Person):
     @staticmethod
     def choose_event(event_choice):
         """
-        this method
+        this method id for select an item
+        :return: index of row
         """
-        # اگر متد قبلی فراخانی شده بود از کاربر بپرسه خروج یا برگشت یا خرید ؟
-
-        # input_user = int(input("your selection : "))
         try:
             with open("event.csv", 'r') as my_file:
                 reader = csv.reader(my_file)
                 rows = list(reader)
                 print("your selection is :", int(rows[event_choice][0]) + 1)
         except FileNotFoundError:
-            logging.exception('couldnt find event file')
+            logging.exception("could\'t find event file")
 
-    def create_account(self):
-        # کاربر اگر قصد خرید داشت یا باید وارد شود یا حساب کاربری بسازد
+    @staticmethod
+    def create_account():
         file_path = "account.csv"
         try:
             df_account = pd.read_csv(file_path)
@@ -117,6 +137,11 @@ class User(Person):
 
     @staticmethod
     def buy_ticket(user_choice):
+        """
+        this method select a vent for sale
+        param user_choice: user select a event and buy it
+        return: if sale is successully return True else return False
+        """
         try:
             many_of_ticket = int(input("how many tickets do you want ?"))
             df_event = pd.read_csv("event.csv")
@@ -182,8 +207,12 @@ class User(Person):
             print("invalid input")
             logger.error("Not found in index .")
 
-    @classmethod
-    def menu_user(self):
+    @staticmethod
+    def menu_user():
+        """
+        this method used for create a menu
+        return: str
+        """
         print("1-show events \n2-choose event \n3-create account \n4-log in \n")
 
 
