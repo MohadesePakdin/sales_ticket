@@ -160,7 +160,8 @@ class User(Person):
             df_first_discount = pd.read_csv("discount.csv")
             df_first_4 = df_first_discount[
                              ["id_discount", "name_discount", "darsad"]].loc[1:, :]
-            discount_persent = df_first_4.iloc[user_choice]["darsad"]
+            # list_off = df_first_discount['name_discount'].to_list()
+            # discount_persent = df_first_4.iloc[list_off.index()]["darsad"]
 
             if mod_capacity > many_of_ticket:
                 price_of_event = many_of_ticket * cost
@@ -174,7 +175,8 @@ class User(Person):
                     print("----------------------shaparak--------------------------")
                     print("paid")
                 elif input_user_off_code in list_off:
-                    total_cost = a - (discount_persent / 100) * a
+                    discount_persent = df_first_4.iloc[list_off.index(input_user_off_code)]["darsad"]
+                    total_cost = a - ((discount_persent / 100) * a)
 
                     if total_cost <= 0:
                         print("this event free")
@@ -187,12 +189,11 @@ class User(Person):
                         print("----------------------shaparak--------------------------")
                         print("paid")
                     cap = df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"]- many_of_ticket
-                    df_event.loc[df_event["id_event"] == user_choice, "MMod_total_capacity"] = cap
+                    df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"] = cap
                     df_event.to_csv("event.csv", index=False)
                 else:
                     print("we haven't this code off")
-                    total_cost = price_of_event - ((job_percent / 100) * price_of_event + (
-                            discount_persent / 100) * price_of_event)
+                    total_cost = a
                     if total_cost <= 0:
                         print("this event free")
                         print("paid")

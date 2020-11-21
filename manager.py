@@ -16,9 +16,9 @@ import pandas as pd
 from termcolor import colored
 
 from person import Person
-import logging
+import logging,colorlog
 
-from colorlog.colorlog import ColoredFormatter
+
 
 
 # #creat and configure logger
@@ -115,8 +115,6 @@ class Admin(Person):
 
     def remove_event(self):
         """This method is for the admin to delete the event.
-
-
         :return:Data frame
         """
         # Which event do you want to delete
