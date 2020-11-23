@@ -63,7 +63,6 @@ class User(Person):
             df_first_3 = df_first_2.loc[[index_event]]
             df_first_3["Cost_event"] = df_first_3["Cost_event"].astype(int)
             df_first_3["Mod_total_capacity"] = df_first_3["Mod_total_capacity"].astype(int)
-            df_first_3["Total_capacity"] = df_first_3["Total_capacity"].astype(int)
             print(df_first_3.loc[[index_event]])
 
         except Exception:
@@ -208,3 +207,5 @@ class User(Person):
                             break
             except ValueError:
                 print("your input is not valid please enter correct event. ")
+o=User("user")
+o.show_details_event(5)

@@ -123,7 +123,7 @@ while True:
                 obj_customer = User("user")
                 while True:
                     print(obj_customer.show_event())
-                    print("do you want sale an eve nt:\n1-yes\n2-no")
+                    print("do you want sale an event:\n1-yes\n2-no")
                     try:
                         selected_user = int(input("enter your choice: "))
                         if selected_user in range(1, 3):
@@ -142,12 +142,12 @@ while True:
                                             break
                                         elif selected_user2 == 2:
                                             obj_customer.create_account()
-                                            obj_customer.log_in()
+                                            id_user=obj_customer.log_in()
                                             obj_customer.show_event()
                                             input_user = int(input("your selection : "))
                                             obj_customer.show_details_event(input_user)
                                             obj_customer.choose_event(input_user)
-                                            obj_customer.buy_ticket(input_user)
+                                            obj_customer.buy_ticket(input_user,id_user)
                                             break
                                         else:
                                             print("your input is not valid please select other choice")

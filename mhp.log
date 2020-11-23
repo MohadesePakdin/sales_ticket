@@ -819,3 +819,66 @@ Traceback (most recent call last):
     raise KeyError(key) from err
 KeyError: 'Total_capacity'
 23-Nov-20 16:47:04 INFO user.py we check code from discount file .
+23-Nov-20 18:58:35 ERROR user.py this is file error
+Traceback (most recent call last):
+  File "D:\python course\virtualEnvironments\sales_ticket\lib\site-packages\pandas\core\indexes\base.py", line 2895, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas\_libs\index.pyx", line 70, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index.pyx", line 101, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 1675, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 1683, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Total_capacity'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\python course\python exe\sales_ticket\user.py", line 66, in show_details_event
+    df_first_3["Total_capacity"] = df_first_3["Total_capacity"].astype(int)
+  File "D:\python course\virtualEnvironments\sales_ticket\lib\site-packages\pandas\core\frame.py", line 2906, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "D:\python course\virtualEnvironments\sales_ticket\lib\site-packages\pandas\core\indexes\base.py", line 2897, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Total_capacity'
+23-Nov-20 19:00:08 ERROR user.py this is file error
+Traceback (most recent call last):
+  File "D:\python course\virtualEnvironments\sales_ticket\lib\site-packages\pandas\core\indexes\base.py", line 2895, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas\_libs\index.pyx", line 70, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index.pyx", line 101, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 1675, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 1683, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Total_capacity'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\python course\python exe\sales_ticket\user.py", line 66, in show_details_event
+    df_first_3["Total_capacity"] = df_first_3["Total_capacity"].astype(int)
+  File "D:\python course\virtualEnvironments\sales_ticket\lib\site-packages\pandas\core\frame.py", line 2906, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "D:\python course\virtualEnvironments\sales_ticket\lib\site-packages\pandas\core\indexes\base.py", line 2897, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Total_capacity'
+23-Nov-20 19:00:21 INFO user.py we check code from discount file .
+23-Nov-20 19:04:34 ERROR user.py this is file error
+Traceback (most recent call last):
+  File "D:\python course\virtualEnvironments\sales_ticket\lib\site-packages\pandas\core\indexes\base.py", line 2895, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas\_libs\index.pyx", line 70, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\index.pyx", line 101, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas\_libs\hashtable_class_helper.pxi", line 1675, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas\_libs\hashtable_class_helper.pxi", line 1683, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Total_capacity'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:/python course/python exe/sales_ticket/user.py", line 66, in show_details_event
+    df_first_3["Total_capacity"] = df_first_3["Total_capacity"].astype(int)
+  File "D:\python course\virtualEnvironments\sales_ticket\lib\site-packages\pandas\core\frame.py", line 2906, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "D:\python course\virtualEnvironments\sales_ticket\lib\site-packages\pandas\core\indexes\base.py", line 2897, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Total_capacity'
+23-Nov-20 19:08:12 ERROR run.py ValueError:invalid input
+23-Nov-20 19:13:22 INFO user.py we check code from discount file .
