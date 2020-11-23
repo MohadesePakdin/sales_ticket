@@ -25,7 +25,8 @@ class User(Person):
         self.password = password
         self.status = status
 
-    def show_event(self):
+    @staticmethod
+    def show_event():
         """
         this method show all of event for user
         return: a dataframe
@@ -43,12 +44,11 @@ class User(Person):
             df_active_event = df_2.loc[df_2['Flag_event'] == 1]
             pd.set_option('display.max_columns', None)
             print(df_active_event)
-
-
         except Exception:
             logging.exception('this is file error')
 
-    def show_details_event(self, index_event):
+    @staticmethod
+    def show_details_event(index_event):
         """
         this method show details of event for user
         param index_event: index of selection event
@@ -143,11 +143,11 @@ class User(Person):
         """
         this method select a vent for sale
         param user_choice: user select a event and buy it
-        return: if sale is successully return True else return False
+        return: if sale is successfully return True else return False
         """
         df_event = pd.read_csv("event.csv")
-        df_sales=pd.read_csv("sales.csv")
-        df_sales_indexed=df_sales.set_index("id_sales", drop=True)
+        df_sales = pd.read_csv("sales.csv")
+        df_sales_indexed = df_sales.set_index("id_sales", drop=True)
         df_account = pd.read_csv("account.csv")
         df_discount = pd.read_csv("discount.csv")
         event_cap = df_event.values.tolist()[user_choice - 1][7]
@@ -185,7 +185,7 @@ class User(Person):
                                 cap = df_event.at[user_choice, 'Mod_total_capacity'] - number_of_ticket
                                 df_event.loc[df_event["id_event"] == user_choice, "Mod_total_capacity"] = cap
                                 df_event.to_csv("event.csv", index=False)
-                                row = [[df_sales_indexed.index[-1] + 1,user_id,user_choice]]
+                                row = [[df_sales_indexed.index[-1] + 1, user_id, user_choice]]
                                 with open("sales.csv", 'a', newline='') as csv_events:
                                     # creating a csv writer object
                                     csv_writer = csv.writer(csv_events)
@@ -208,4 +208,3 @@ class User(Person):
                             break
             except ValueError:
                 print("your input is not valid please enter correct event. ")
-

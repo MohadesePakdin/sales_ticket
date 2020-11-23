@@ -123,7 +123,7 @@ while True:
                 obj_customer = User("user")
                 while True:
                     print(obj_customer.show_event())
-                    print("do you want sale an event:\n1-yes\n2-no")
+                    print("do you want sale an eve nt:\n1-yes\n2-no")
                     try:
                         selected_user = int(input("enter your choice: "))
                         if selected_user in range(1, 3):
