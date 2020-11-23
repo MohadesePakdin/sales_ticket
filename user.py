@@ -178,8 +178,6 @@ class User(Person):
                         break
                     else:
                         if discount in list_off:
-                            print(discount)
-                            print(df_discount.iloc[list_off.index(discount)]["darsad"])
                             darsad_discount = df_discount.iloc[list_off.index(discount)]["darsad"]
                             total_off = event_cost - (event_cost * (darsad_discount / 100))
                             if event_cost <= 0:
