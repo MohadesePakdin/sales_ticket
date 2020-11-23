@@ -83,7 +83,7 @@ while True:
                                               "7-Exit ")
                                         try:
                                             admin_input_selected = int(input("select an item: "))
-                                            if admin_input_selected in range(1, 7):
+                                            if admin_input_selected in range(1, 8):
                                                 if admin_input_selected == 1:
                                                     print(obj_admin.active_event())
                                                 elif admin_input_selected == 2:
@@ -133,12 +133,12 @@ while True:
                                     selected_user2 = int(input("enter your choice: "))
                                     if selected_user2 in range(1, 3):
                                         if selected_user2 == 1:
-                                            obj_customer.log_in()
+                                            id_user=obj_customer.log_in()
                                             obj_customer.show_event()
-                                            input_user = int(input("your selection : "))
+                                            input_user = int(input("your selection is: "))
                                             obj_customer.show_details_event(input_user)
                                             obj_customer.choose_event(input_user)
-                                            obj_customer.buy_ticket(input_user)
+                                            obj_customer.buy_ticket(input_user,id_user)
                                             break
                                         elif selected_user2 == 2:
                                             obj_customer.create_account()
