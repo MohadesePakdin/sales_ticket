@@ -207,5 +207,3 @@ class User(Person):
                             break
             except ValueError:
                 print("your input is not valid please enter correct event. ")
-o=User("user")
-o.show_details_event(5)
